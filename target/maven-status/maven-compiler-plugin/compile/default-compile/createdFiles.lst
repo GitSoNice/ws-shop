@@ -1,0 +1,12 @@
+com\ws\shop\controller\AdminController.class
+com\ws\shop\controller\UserController.class
+com\ws\shop\controller\CartController.class
+com\ws\shop\interceptor\LoginInterceptor.class
+com\ws\shop\controller\CheckCodeController.class
+com\ws\shop\controller\ProductsController.class
+com\ws\shop\controller\OrderController.class
+com\ws\shop\controller\WalletController.class
+com\ws\shop\controller\PacketController.class
+com\ws\shop\controller\IndexController.class
+com\ws\shop\controller\CategoryController.class
+com\ws\shop\controller\CategorySecondController.class
