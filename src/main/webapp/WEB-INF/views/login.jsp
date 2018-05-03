@@ -29,6 +29,17 @@
 </head>
 
 <body>
+<%
+    String username="";
+    String check="";
+    Cookie[] cookies=request.getCookies();
+    for(int i=0;cookies!=null&&i<cookies.length;i++){
+        if("username".equals(cookies[i].getName())){
+            username=cookies[i].getValue();
+            check="checked";
+        }
+    }
+%>
 <div class="container header">
 
     <%@ include file="menu.jsp" %>
@@ -64,7 +75,7 @@
                         <tbody>
                         <tr>
                             <th>用户名:</th>
-                            <td><form:input path="username" name="username" id="username"
+                            <td><form:input path="username" name="username" id="username" value="<%=username%>"
                                             class="text" maxlength="20"/>
                                 <c:if test="${notUser != null }">
                                     <font color="red">没有此用户</font>
@@ -102,7 +113,7 @@
                             <th>&nbsp;</th>
                             <td>
                                 <label>
-                                    <input type="checkbox" id="isRememberUsername" name="isRememberUsername"
+                                    <input type="checkbox" id="isRememberUsername" name="isRememberUsername" checked="<%=check%>"
                                                value="true"/>记住用户名 </label>
                                 <label> &nbsp;&nbsp;<a href ="${pageContext.request.contextPath}/forgetPassword">找回密码</a>
                                 </label>

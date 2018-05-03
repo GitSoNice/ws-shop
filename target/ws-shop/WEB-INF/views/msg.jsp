@@ -7,9 +7,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
     <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/second.js"></script>
 </head>
 
-<body>
+<body  onload="startSecond()">
 
 <div id="divcontent">
     <table width="850px" border="0" cellspacing="0">
@@ -24,6 +25,7 @@
                             <font style="font-weight:bold; color:#FF0000">
                                 <c:if test="${registerSuccess != null }">
                                     注册成功，可以登录了!
+                                    <span id="second">5</span>秒后自动为您转跳登录页面
                                 </c:if>
                                 <c:if test="${notUser != null }">
                                     激活失败,无此用户!

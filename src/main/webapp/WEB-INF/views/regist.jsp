@@ -45,6 +45,16 @@
                 alert("地址不能为空!");
                 return false;
             }
+            var email = $("#email").val();
+            if (email == null || email == '') {
+                alert("邮箱不能为空!");
+                return false;
+            }
+            var age = $("#age").val();
+            if (age == null || age == '') {
+                alert("年龄不能为空!");
+                return false;
+            }
         }
 
         function checkUsername() {
@@ -119,11 +129,14 @@
                         <tr>
                             <th><span class="requiredField">*</span>年龄:</th>
                             <td><form:input path="age" id="age" class="text" type="number" min="1"
-                                            maxlength="3"/></td>
+                                            maxlength="3"/>
+                                <form:errors path="age" cssClass="error"/>
+                            </td>
                         </tr>
                         <tr>
                             <th>电话:</th>
-                            <td><form:input path="phone" class="text"/></td>
+                            <td><form:input path="phone" class="text"/>
+                                <form:errors path="phone" cssClass="error"/></td>
                         </tr>
                         <tr>
                             <th><span class="requiredField">*</span>地址:</th>

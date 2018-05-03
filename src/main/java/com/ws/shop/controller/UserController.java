@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -63,8 +64,8 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "login")
-    public String login(@ModelAttribute("user") UserEntity user, String checkcode,
-                        HttpSession session, Map<String, Object> map) {
+    public String login(@ModelAttribute("user") UserEntity user, String checkcode,String isRememberUsername,String autoLogin,
+                        HttpSession session, Map<String, Object> map,HttpServletResponse response) {
         //从session中获取验证码
         String checkCode = (String) session.getAttribute("checkcode");
         //如果验证码不一致，直接返回到登陆的页面
@@ -72,6 +73,17 @@ public class UserController {
             map.put("errorCheckCode", "errorCheckCode");
             return "login";
         }
+
+        Cookie cookie = new Cookie("username",user.getUsername());
+        cookie.setPath("/");
+        if(isRememberUsername != null){
+            cookie.setMaxAge(Integer.MAX_VALUE);
+
+        }else{
+            cookie.setMaxAge(0);
+        }
+        response.addCookie(cookie);
+
         //判断是否存在用户
         UserEntity isExistUser = userEntityService.existUser(user.getUsername());
         if (isExistUser == null) {
@@ -155,11 +167,11 @@ public class UserController {
         response.setContentType("text/html;charset=UTF-8");
         if (userEntityService.existUser(userName) != null) {
 
-            // 查询到该用户:用户名已经存在
+            // 用户名存在
             response.getWriter().println("1");
         } else {
 
-            // 没查询到该用户:用户名可以使用
+            // 可以使用用户名
             response.getWriter().println("0");
         }
         return null;
