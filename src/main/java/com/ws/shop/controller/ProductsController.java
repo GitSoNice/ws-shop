@@ -230,7 +230,7 @@ public class ProductsController {
         Page<ProductsEntity> products = productsEntityService.findByCsid(csid,pageInfo);
         map.put("page", products);
         map.put("csid", csid);
-        return "productList";
+        return "new_productList";
     }
 
     /**
@@ -250,7 +250,7 @@ public class ProductsController {
         Page<ProductsEntity> products = productsEntityService.findByCid(cid,pageInfo);
         map.put("page", products);
         map.put("cid", cid);
-        return "productList";
+        return "new_productList";
     }
 
     /**
@@ -269,7 +269,7 @@ public class ProductsController {
         Page<ProductsEntity> products = productsEntityService.findByName(name,pageInfo);
         map.put("page", products);
         map.put("name",name);
-        return "productList";
+        return "new_productList";
     }
 
     /**
@@ -291,7 +291,7 @@ public class ProductsController {
         Date privilege = category.getPrivilegeTime();
         String privilegeTime = StringUtils.substring(privilege.toString(),0, 10);
         map.put("privilegeTime", privilegeTime);
-        return "product";
+        return "new_product";
     }
 
     /**
@@ -311,6 +311,6 @@ public class ProductsController {
         Page<ProductsEntity> products = productsEntityService.findByName(proname,pageInfo);
         map.put("page", products);
         map.put("name",proname);
-        return "productList";
+        return "new_productList";
     }
 }

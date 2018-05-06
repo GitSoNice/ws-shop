@@ -10,7 +10,7 @@
     <link href="${pageContext.request.contextPath}/css/userinfo.css"
           rel="stylesheet" type="text/css"/>
     <script type="text/javascript"
-            src="${pageContext.request.contextPath}/js/jquery-1.8.3.js"></script>
+            src="${pageContext.request.contextPath}/js/jquery.js"></script>
     <style>
         .submit{
             width: 120px;

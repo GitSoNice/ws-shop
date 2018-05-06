@@ -312,7 +312,7 @@ div.index .hotProduct .title {
 	float: left;
 	margin-bottom: 10px;
 	/* background: url(../images/index.gif) 0px -150px no-repeat; */
-	background-color: #36648B;
+	background-color: lightgrey;
 }
 
 div.index .hotProduct .title strong {
@@ -320,7 +320,7 @@ div.index .hotProduct .title strong {
 	display: block;
 	float: left;
 	padding-left: 10px;
-	color: #ffffff;
+	color: #555;
 	font-size: 16px;
 	font-family: "Microsoft YaHei";
 }
@@ -340,7 +340,7 @@ div.index .hotProduct .tab {
 	margin-bottom: 10px;
 	overflow: hidden;
 	/* background: url(../images/index.gif) 0px -210px repeat-x; */
-	background-color: #36648B;
+	background-color: lightgrey;
 }
 
 div.index .hotProduct .tab li {
@@ -358,7 +358,7 @@ div.index .hotProduct .tab li {
 
 div.index .hotProduct .tab li.current {
 	font-weight: bold;
-	background-color: #36648B;
+	background-color: lightgrey;
 }
 
 div.index .hotProduct .hotProductAd {
@@ -405,7 +405,7 @@ div.index .newProduct .title {
 	float: left;
 	margin-bottom: 10px;
 	/* background: url(../images/index.gif) 0px -270px no-repeat; */
-	background-color: #2F4F4F;
+	background-color: lightgrey;
 }
 
 div.index .newProduct .title strong {
@@ -413,7 +413,7 @@ div.index .newProduct .title strong {
 	display: block;
 	float: left;
 	padding-left: 10px;
-	color: #ffffff;
+	color: #555555;
 	font-size: 16px;
 	font-family: "Microsoft YaHei";
 }
@@ -433,7 +433,7 @@ div.index .newProduct .tab {
 	margin-bottom: 10px;
 	overflow: hidden;
 	/* background: url(../images/index.gif) 0px -330px repeat-x; */
-	background-color: #2F4F4F;
+	background-color: lightgrey;
 }
 
 div.index .newProduct .tab li {
@@ -450,7 +450,7 @@ div.index .newProduct .tab li {
 
 div.index .newProduct .tab li.current {
 	font-weight: bold;
-	background-color: #2F4F4F;
+	background-color: lightgrey;
 }
 
 div.index .newProduct .newProductAd {

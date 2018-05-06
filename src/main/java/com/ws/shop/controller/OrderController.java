@@ -124,7 +124,7 @@ public class OrderController {
 
         OrdersEntity order = orderEntityService.findByOid(oid);
         map.put("order", order);
-        return "order";
+        return "new_order";
     }
 
     @RequestMapping(value="findOrderByUid")
@@ -138,7 +138,7 @@ public class OrderController {
         pageInfo.setPage(page);
         Page<OrdersEntity> ordersEntity = orderEntityService.findByUid(user.getUid(),pageInfo);
         map.put("page", ordersEntity);
-        return "orderList";
+        return "new_orderList";
     }
 
     /**
@@ -156,6 +156,7 @@ public class OrderController {
             return "msg";
         }
         Cart cart = (Cart) session.getAttribute("cart");
+        logger.info("cart{}",cart.getTotal());
         if (cart == null) {
             return "redirect:myCart";
         }
@@ -186,7 +187,7 @@ public class OrderController {
         //清除购物车
         cart.clearCart();
         map.put("order", order);
-        return "order";
+        return "new_order";
     }
 
     /**
@@ -201,7 +202,7 @@ public class OrderController {
      * @return
      */
     @RequestMapping(value = "/payOrder")
-    public String payOrder(Integer oid, String addr, String name, String phone, String total, HttpSession session,
+    public String payOrder(Integer oid, String addr, String name, String phone, PageInfo pageInfo, String total, HttpSession session,
                            ModelMap map) {
         //根据oid查找订单
         OrdersEntity order = orderEntityService.findByOid(oid);
@@ -217,6 +218,9 @@ public class OrderController {
         Float money = wallet.getMoney();
         Float fee = Float.parseFloat(total);
 
+        pageInfo.setPage(0);
+        Page<OrdersEntity> ordersEntity = orderEntityService.findByUid(user.getUid(),pageInfo);
+        map.put("page", ordersEntity);
         //如果钱包余额大于消费金额，更新商品库存
         if (money >= fee) {
 
@@ -237,10 +241,10 @@ public class OrderController {
             afterOrder.setState(2);
             orderEntityService.saveOrders(afterOrder);
             map.put("paymentSuccess", "success");
-            return "orderList";
+            return "new_orderList";
         }
         map.put("paymentFalse", "false");
-        return "orderList";
+        return "new_orderList";
     }
 
     /**

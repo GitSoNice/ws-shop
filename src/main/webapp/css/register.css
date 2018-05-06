@@ -28,9 +28,10 @@ div.register .title strong {
 }
 
 div.register table {
-	width: 640px;
+	width: 100%;
 	float: left;
 	margin-top: 20px;
+	margin-left: 200px;
 }
 
 div.register th {

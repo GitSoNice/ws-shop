@@ -40,7 +40,7 @@ public class PacketController {
         UserEntity user = (UserEntity) session.getAttribute("user");
         if(user == null){
             logger.info("还未登陆!");
-            return "login";
+            return "redirect:userLogin";
         }
         int page =Integer.parseInt(request.getParameter("ppage"));
         pageInfo.setPage(page);
@@ -49,7 +49,7 @@ public class PacketController {
         modelMap.put("page",tickets);
         modelMap.put("userinfo",user);
         modelMap.put("packet",packetEntity);
-        return "userinfo/packet";
+        return "userinfo/new_packet";
     }
 
 

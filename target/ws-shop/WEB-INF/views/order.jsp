@@ -16,9 +16,7 @@
 </head>
 <body>
 
-<div class="container header">
     <%@ include file="menu.jsp" %>
-</div>
 <div class="container cart">
     <div class="span24">
         <div class="step step1">

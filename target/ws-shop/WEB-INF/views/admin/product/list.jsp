@@ -9,7 +9,7 @@
 <script language="javascript"
 	src="${pageContext.request.contextPath}/js/public.js"></script>
 <script type="text/javascript"
-	src="${pageContext.request.contextPath}/js/jquery-1.8.3.js"></script>
+	src="${pageContext.request.contextPath}/js/jquery.js"></script>
 <script type="text/javascript">
 	function addProduct() {
 		window.location.href = "${pageContext.request.contextPath}/gotoAddProduct";

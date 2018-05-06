@@ -140,12 +140,13 @@
                     </c:if>
                     </strong>
                 </c:if>
+                赠送积分: <em id="effectivePoint"><c:out value="${sessionScope.cart.total}"/></em>
                 商品金额:
                 <strong id="effectivePrice"><p id="discountTotal">￥<c:out value="${sessionScope.cart.total}"/>元</p>
                 </strong>
             </div>
             <div class="bottom">
-                <a href="${ pageContext.request.contextPath }/clearCart" id="clear" class="clear">清空购物车</a>
+                <a href="${pageContext.request.contextPath }/clearCart" id="clear" class="clear">清空购物车</a>
                 <a href="${pageContext.request.contextPath}/saveOrder" id="submit" class="submit">提交订单</a>
             </div>
         </div>

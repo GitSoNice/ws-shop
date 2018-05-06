@@ -79,7 +79,6 @@ div.hotProductCategory {
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
-	border: solid 1px #e4e4e4;
 }
 
 div.hotProductCategory dl {
@@ -96,16 +95,19 @@ div.hotProductCategory dl.last {
 
 div.hotProductCategory dt a {
 	font-family: "Microsoft YaHei";
-	color: #2c64b1;
-	font-size: 14px;
+	color: #555;
+	font-size: 18px;
 }
 
 div.hotProductCategory dd {
-	width: 100px;
-	float: left;
-	padding-right: 4px;
+	 width: 100px;
+	 float: left;
+	 padding-right: 4px;
+ }
+div.hotProductCategory dd a{
+	color:#555;
+	font-size:14px;
 }
-
 /* ---------- HotProduct ---------- */
 
 div.hotProduct {
@@ -662,7 +664,7 @@ div.productContent .productImage {
 	margin-bottom: 10px;
 }
 
-div.productContent .productImage .medium {
+div.productContent .productImage .medium1 {
 	width: 300px;
 	height: 300px;
 	display: block;

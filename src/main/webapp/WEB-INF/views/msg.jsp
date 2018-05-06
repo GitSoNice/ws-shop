@@ -18,8 +18,7 @@
             <td style="padding:30px; text-align:center">
                 <table width="60%" border="0" cellspacing="0" style="margin-top:70px">
                     <tr>
-                        <td style="width:98px"><img
-                                src="${pageContext.request.contextPath}/images/IconTexto_WebDev_009.jpg" width="128"
+                        <td style="width:98px"><img src="${pageContext.request.contextPath}/images/IconTexto_WebDev_009.jpg" width="128"
                                 height="128"/></td>
                         <td style="padding-top:30px">
                             <font style="font-weight:bold; color:#FF0000">
@@ -29,9 +28,11 @@
                                 </c:if>
                                 <c:if test="${notUser != null }">
                                     激活失败,无此用户!
+                                    <span id="second">5</span>秒后自动为您转跳登录页面
                                 </c:if>
                                 <c:if test="${notLogin != null}">
                                     您还没有登陆，请先登录
+                                    <span id="second">5</span>秒后自动为您转跳登录页面
                                 </c:if>
 
                             </font>

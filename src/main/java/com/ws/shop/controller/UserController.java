@@ -71,7 +71,7 @@ public class UserController {
         //如果验证码不一致，直接返回到登陆的页面
         if (!checkCode.equalsIgnoreCase(checkcode)) {
             map.put("errorCheckCode", "errorCheckCode");
-            return "login";
+            return "new_login";
         }
 
         Cookie cookie = new Cookie("username",user.getUsername());
@@ -88,7 +88,7 @@ public class UserController {
         UserEntity isExistUser = userEntityService.existUser(user.getUsername());
         if (isExistUser == null) {
             map.put("notUser", "notUser");
-            return "login";
+            return "new_login";
         }
         //判断用户名和密码是否都正确
         String md5Password = MD5.md5(user.getPassword());
@@ -96,7 +96,7 @@ public class UserController {
         UserEntity u = userEntityService.findUserByUsernameAndPassword(user);
         if (u == null) {
             map.put("notPassword", "notPassword");
-            return "login";
+            return "new_login";
         }
         session.setAttribute("user", u);
         return "redirect:index";
@@ -108,7 +108,7 @@ public class UserController {
      */
     @RequestMapping(value = "/userLogin")
     public String userLogin() {
-        return "login";
+        return "new_login";
     }
 
     /**
@@ -134,7 +134,7 @@ public class UserController {
             }
 
             //返回到注册页面
-            return "regist";
+            return "new_regist";
         }
         //从session中获取验证码
         String checkCode = (String) session.getAttribute("checkcode");
@@ -142,7 +142,7 @@ public class UserController {
         //如果验证码不一致，直接返回
         if (!checkCode.equalsIgnoreCase(checkcode)) {
             map.put("errorCheckCode", "errorCheckCode");
-            return "regist";
+            return "new_regist";
         }
         String md5Password = MD5.md5(user.getPassword());
         user.setPassword(md5Password);
@@ -183,7 +183,7 @@ public class UserController {
      */
     @RequestMapping("userRegister")
     public String register() {
-        return "regist";
+        return "new_regist";
     }
 
     /**
@@ -192,7 +192,7 @@ public class UserController {
      */
     @RequestMapping("forgetPassword")
     public String forgetPassword() {
-        return "forgetpassword";
+        return "new_forgetpassword";
     }
 
     /**
@@ -213,11 +213,11 @@ public class UserController {
             ActionResult res = userEntityService.update(u);
             if(res.getCode() == 200){
                 map.put("resetsuccess","success");
-                return "login";
+                return "new_login";
             }
         }
         map.put("resetfailed","failed");
-        return "forgetpassword";
+        return "new_forgetpassword";
     }
 
     /**
@@ -232,14 +232,14 @@ public class UserController {
         UserEntity u = userEntityService.existUser(user.getUsername());
         if(u == null){
             map.put("noExistUser","false");
-            return "forgetPassword";
+            return "new_forgetPassword";
         }
         String randomPassword = RandomStringUtils.randomAlphabetic(8);
         String md5Password = MD5.md5(randomPassword);
         if(!user.getEmail().equals(u.getEmail())){
             logger.info("邮箱不正确，不能进行密码修改");
             map.put("emailFalse","false");
-            return "forgetpassword";
+            return "new_forgetpassword";
         }
         u.setPassword(md5Password);
         ActionResult res = userEntityService.update(u);
@@ -248,15 +248,15 @@ public class UserController {
                 logger.info("开始发送邮件：");
                 MailUtil.testSendEmail(u.getEmail(), randomPassword, u.getUsername());
                 map.put("sendEmail", "success");
-                return "login";
+                return "new_login";
             } catch (Exception e) {
                 logger.info("发送邮件失败{}", e);
                 map.put("sendEmail", "failed");
-                return "forgetpassword";
+                return "new_forgetpassword";
             }
         }
         map.put("sendEmail", "failed");
-        return "forgetpassword";
+        return "new_forgetpassword";
     }
 
     /**
@@ -286,9 +286,9 @@ public class UserController {
         }
         if(user != null){
             map.put("userinfo",user);
-            return "userinfo/resetpassword";
+            return "userinfo/new_resetpassword";
         }
-        return "login";
+        return "new_login";
     }
 
     /**
@@ -311,7 +311,7 @@ public class UserController {
             if(res.getCode() == 200){
                 session.invalidate();
                 map.put("resetsuccess","success");
-                return "login";
+                return "new_login";
             }
         }
         map.put("resetfailed","failed");
@@ -344,7 +344,7 @@ public class UserController {
             logger.info("开始发送邮件：");
             MailUtil.testSendEmail(userEntity.getEmail(),randomPassword,userEntity.getUsername());
             map.put("sendEmail","success");
-            return "login";
+            return "new_login";
         } catch (Exception e) {
             logger.info("发送邮件失败{}",e);
             map.put("sendEmail","failed");
@@ -371,9 +371,9 @@ public class UserController {
         UserEntity user = (UserEntity) session.getAttribute("user");
         if(user != null){
             map.put("userinfo",user);
-            return "userinfo/userinfo";
+            return "userinfo/new_userinfo";
         }
-        return "login";
+        return "new_login";
     }
 
     /**

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.8.3.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.js"></script>
 
     <script type="text/javascript">
         $(function () {
@@ -75,8 +75,7 @@
                         <tbody>
                         <tr>
                             <th>用户名:</th>
-                            <td><form:input path="username" name="username" id="username" value="<%=username%>"
-                                            class="text" maxlength="20"/>
+                            <td><form:input path="username" name="username" id="username" value="<%=username%>" class="text" maxlength="20"/>
                                 <c:if test="${notUser != null }">
                                     <font color="red">没有此用户</font>
                                 </c:if>

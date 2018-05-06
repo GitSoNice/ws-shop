@@ -54,7 +54,7 @@ public class CartController {
             map.put("notLogin", "notLogin");
             return "msg";
         }
-        return "cart";
+        return "new_cart";
     }
 
     /**
@@ -66,7 +66,7 @@ public class CartController {
     public String clearCart(HttpSession session) {
         Cart cart = (Cart) session.getAttribute("cart");
         cart.clearCart();
-        return "cart";
+        return "new_cart";
     }
 
     /**
@@ -79,7 +79,7 @@ public class CartController {
     public String removeCart(@PathVariable("pid") Integer pid, HttpSession session) {
         Cart cart = (Cart) session.getAttribute("cart");
         cart.removeCart(pid);
-        return "cart";
+        return "new_cart";
     }
 
     /**
@@ -133,7 +133,7 @@ public class CartController {
             session.setAttribute("cart", cart);
         }
         cart.addCart(cartItem);
-        return "cart";
+        return "new_cart";
     }
 
 }

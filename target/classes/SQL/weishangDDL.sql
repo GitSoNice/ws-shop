@@ -148,7 +148,7 @@ $$
 DELIMITER ;
 
 DELIMITER $$
-CREATE TRIGGER u_afterinsert AFTER INSERT ON user FOR EACH ROW insert into packet(uid) values (new.uid)
+CREATE TRIGGER u_safterinsert AFTER INSERT ON wallet FOR EACH ROW insert into packet(uid) values (new.uid)
 $$
 DELIMITER ;
 

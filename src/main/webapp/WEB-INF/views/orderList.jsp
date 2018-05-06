@@ -20,7 +20,7 @@
 <c:if test="${paymentSuccess != null }">
     <script>
         alert('付款成功！');
-        window.location.href="${ pageContext.request.contextPath }/findOrderByUid?uopage=0"
+        jquery.js="${ pageContext.request.contextPath }/findOrderByUid?uopage=0"
     </script>
 </c:if>
 <c:if test="${paymentFalse != null }">

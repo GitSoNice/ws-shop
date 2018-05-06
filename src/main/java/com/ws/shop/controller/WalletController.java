@@ -32,12 +32,12 @@ public class WalletController {
         UserEntity user = (UserEntity) session.getAttribute("user");
         if(user == null){
             logger.info("还未登陆!");
-            return "login";
+            return "redirect:userLogin";
         }
         WalletEntity walletEntity = walletEntityService.findByUid(user.getUid());
         modelMap.put("userinfo",user);
         modelMap.put("wallet",walletEntity);
-        return "userinfo/wallet";
+        return "userinfo/new_wallet";
     }
 
 
