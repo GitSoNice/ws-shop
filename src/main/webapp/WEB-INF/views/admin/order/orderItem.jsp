@@ -8,10 +8,10 @@
 			<c:forEach items="${orderItems}" var="i">
 			<tr>
 				<td width="18%" align="center" bgColor="#f5fafe" class="ta_01">
-					图片
+					商品编号
 				</td>
 				<td class="ta_01" bgColor="#ffffff">
-					<img id="pic" width="40" height="45" src="${ pageContext.request.contextPath }/<c:out value="${i.product.image}"/>">
+            <td class="ta_01" bgColor="#ffffff"><c:out value="${i.product.pid}" /></td>
 				</td>
 			</tr>
 

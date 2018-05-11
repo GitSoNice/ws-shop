@@ -10,7 +10,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>登录</title>
+    <title>商品信息</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index-1.css" />
     <link href="${pageContext.request.contextPath}/css/userinfo.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/css/product.css" rel="stylesheet" type="text/css"/>

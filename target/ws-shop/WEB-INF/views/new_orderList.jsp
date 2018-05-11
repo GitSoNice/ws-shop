@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>确认订单页面</title>
+    <title>我的订单列表</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index-1.css" />
     <link href="${pageContext.request.contextPath}/css/userinfo.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/css/cart.css" rel="stylesheet" type="text/css"/>

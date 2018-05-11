@@ -8,8 +8,17 @@
 	rel="stylesheet" type="text/css" />
 <script language="javascript"
 	src="${pageContext.request.contextPath}/js/public.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/js/jquery.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index-1.css" />
+    <link href="${pageContext.request.contextPath}/css/userinfo.css"
+          rel="stylesheet" type="text/css"/>
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript"
+            src="${pageContext.request.contextPath}/js/jquery.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 <script type="text/javascript">
 	function addProduct() {
 		window.location.href = "${pageContext.request.contextPath}/gotoAddProduct";
@@ -25,97 +34,104 @@
 </HEAD>
 <body>
 	<br>
-	<form id="Form1" name="Form1"
-		action="${pageContext.request.contextPath}/user/list.jsp"
-		method="post">
-		<table cellSpacing="1" cellPadding="0" width="100%" align="center"
-			bgColor="#f5fafe" border="0">
-			<TBODY>
+    <div>
+        <form action="${pageContext.request.contextPath}/findByPidAndPnameAndCsname?ppcpage=0" method="post">
+                    商品编号<input type="text" id="pid" name="pid" placeholder="商品编号"/>
+                    商品名称<input type="text" id="pname" name="pname" placeholder="商品名"/>
+                    二级分类名称<input type="text" id="csname" name="csname" placeholder="二级分类名"/>
+                    <input type="submit" value="查询" class="btn btn-primary" />
+                    <button type="button" id="add" name="add" value="添加" class="btn btn-primary" onclick="addProduct()">
+                        &#28155;&#21152;</button>
+        </form>
+    </div>
+		<table class="table">
+			<tbody>
 				<tr>
-					<td class="ta_01" align="center" bgColor="#afd1f3"><strong>商品列表</strong>
-					</TD>
+                    <td><strong>商品列表</strong></td>
 				</tr>
-				<tr>
-					<td class="ta_01" align="right">
-						<button type="button" id="add" name="add" value="添加"
-							class="button_add" onclick="addProduct()">
-							&#28155;&#21152;</button>
-					</td>
-				</tr>
-				<tr>
-					<td class="ta_01" align="center" bgColor="#f5fafe">
-						<table cellspacing="0" cellpadding="1" rules="all"
-							bordercolor="gray" border="1" id="DataGrid1"
-							style="BORDER-RIGHT: gray 1px solid; BORDER-TOP: gray 1px solid; BORDER-LEFT: gray 1px solid; WIDTH: 100%; WORD-BREAK: break-all; BORDER-BOTTOM: gray 1px solid; BORDER-COLLAPSE: collapse; BACKGROUND-COLOR: #f5fafe; WORD-WRAP: break-word">
-							<tr
-								style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3">
 
-								<td align="center" width="18%">序号</td>
-								<td align="center" width="17%">商品编号</td>
-								<td align="center" width="17%">商品图片</td>
-								<td align="center" width="17%">商品名称</td>
-								<td align="center" width="17%">商品价格</td>
-								<td align="center" width="10%">库存量</td>
-								<td align="center" width="17%">是否热门</td>
-								<td width="7%" align="center">编辑</td>
-								<td width="7%" align="center">删除</td>
-							</tr>
-							<c:forEach var="p" items="${page.content}" varStatus="vs">
-								<tr onmouseover="this.style.backgroundColor = 'white'"
-									onmouseout="this.style.backgroundColor = '#F5FAFE';">
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="18%"><c:out value="${vs.index+1}"></c:out></td>
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="17%" id="productId"><c:out value="${p.pid}" /></td>
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="17%"><img width="40" height="45"
-										src="${ pageContext.request.contextPath }/<c:out value="${p.image}"/>">
-									</td>
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="17%" id="productName"><c:out value="${p.pname}" /></td>
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="17%"><c:out value="${p.shop_price}" /></td>
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center" id="inventory" 
-										width="10%"><c:out value="${p.inventory}" /></td>
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="17%"><c:if test="${p.is_hot==1}">
-													是
-												</c:if> <c:if test="${p.is_hot!=1}">
-													否
-												</c:if></td>
-									<td align="center" style="HEIGHT: 22px"><a
-										href="${ pageContext.request.contextPath }/editProduct/<c:out value="${p.pid}"/>">
-											<img
-											src="${pageContext.request.contextPath}/images/i_edit.gif"
-											border="0" style="CURSOR: hand">
-									</a></td>
+				<tr>
+                    <table class="table" >
+                        <thead>
+                            <tr>
+                                <td>序号</td>
+                                <td>商品编号</td>
+                                <td>二级分类</td>
+                                <td>商品图片</td>
+                                <td>商品名称</td>
+                                <td>商品价格</td>
+                                <td>库存量</td>
+                                <td>是否热门</td>
+                                <td>编辑</td>
+                                <td>删除</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach var="p" items="${page.content}" varStatus="vs">
+                                <tr onmouseover="this.style.backgroundColor = 'white'"
+                                    onmouseout="this.style.backgroundColor = '#F5FAFE';">
+                                    <td><c:out value="${vs.index+1}"></c:out></td>
+                                    <td><c:out value="${p.pid}" /></td>
+                                    <td><c:out value="${p.categorySecond.csname}" /></td>
+                                    <td>
+                                        <img width="40" height="45" src="${ pageContext.request.contextPath }/<c:out value="${p.image}"/>">
+                                    </td>
+                                    <td><c:out value="${p.pname}" /></td>
+                                    <td><c:out value="${p.shop_price}" /></td>
+                                    <td><c:out value="${p.inventory}" /></td>
+                                    <td>
+                                        <c:if test="${p.is_hot==1}">是</c:if>
+                                        <c:if test="${p.is_hot!=1}">否</c:if>
+                                    </td>
+                                    <td>
+                                        <a href="${ pageContext.request.contextPath }/editProduct/<c:out value="${p.pid}"/>">
+                                            <img src="${pageContext.request.contextPath}/images/i_edit.gif" border="0" style="CURSOR: hand">
+                                        </a>
+                                    </td>
 
-									<td align="center" style="HEIGHT: 22px"><a id="delete"
-										href="${ pageContext.request.contextPath }/deleteProduct/<c:out value="${p.pid}"/>">
-											<img
-											src="${pageContext.request.contextPath}/images/i_del.gif"
-											width="16" height="16" border="0" style="CURSOR: hand">
-									</a></td>
-								</tr>
-							</c:forEach>
-						</table>
-					</td>
+                                    <td>
+                                        <a id="delete" href="${ pageContext.request.contextPath }/deleteProduct/<c:out value="${p.pid}"/>">
+                                            <img src="${pageContext.request.contextPath}/images/i_del.gif" width="16" height="16" border="0" style="CURSOR: hand">
+                                        </a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
 				</tr>
-				<tr align="center">
-					<td colspan="7">
-						第<c:out value="${page.number+1}" />/<c:out value="${page.totalPages}"/>页
-						<a href="listProduct?propage=0"/>首页</a>|
-						<c:if test="${page.number+1 > 1 }">
-							<a href="${ pageContext.request.contextPath }/listProduct?propage=<c:out value="${page.number-1 }"/>">上一页</a>|
-						</c:if>
-						<c:if test="${page.number+1 < page.totalPages }">
-						<a href="${ pageContext.request.contextPath }/listProduct?propage=<c:out value="${page.number+1 }"/>">下一页</a>|
-						</c:if>
-						<a href="${ pageContext.request.contextPath }/listProduct?propage=<c:out value="${page.totalPages-1 }"/>">尾页</a>|
-					</td>
+				<tr>
+                    <ul class="pagination" style="float:right;">
+                        <c:if test="${page.totalPages !=0 }">
+                            <li><a href="${pageContext.request.contextPath}/listProduct?propage=?ppage=0">&laquo;</a></li>
+                            <c:if test="${page.number+1 > 1 }">
+                                <li><a href="${pageContext.request.contextPath}/listProduct?propage=${page.number-1 }">&lt;</a></li>
+                            </c:if>
+                            <c:forEach var="i" begin="1" end="${page.totalPages}">
+                                <!-- 如果是当前页则不能够点击 -->
+                                <c:if test="${i == page.number+1 }">
+                                    <li class="active"><a>${page.number +1}</a></li>
+                                </c:if>
+
+                                <c:if test="${i != page.number+1 }">
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/listProduct?propage=${i-1}">
+                                            <c:out value="${i}"/>
+                                        </a>
+                                    </li>
+                                </c:if>
+                            </c:forEach>
+
+                            <!-- 下一页 -->
+                            <c:if test="${page.number+1 < page.totalPages }">
+                                <li><a href="${pageContext.request.contextPath}/listProduct?propage=${page.number+1 }">&gt;</a></li>
+                            </c:if>
+
+                            <!-- 尾页 -->
+                            <li><a href="${pageContext.request.contextPath}/listProduct?propage=${page.totalPages-1 }">&raquo;</a></li>
+                        </c:if>
+                    </ul>
 				</tr>
-			</TBODY>
+			</tbody>
 		</table>
-	</form>
 </body>
 </HTML>

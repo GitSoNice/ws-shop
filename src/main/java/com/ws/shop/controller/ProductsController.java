@@ -313,4 +313,30 @@ public class ProductsController {
         map.put("name",proname);
         return "new_productList";
     }
+
+
+    /**
+     * 根据商品id，商品名字，二级分类查找商品并分页
+     * @param map
+     * @param pageInfo
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/findByPidAndPnameAndCsname")
+    public String findByPidAndPnameAndCsname(ModelMap map , PageInfo pageInfo,HttpServletRequest request) throws UnsupportedEncodingException {
+        String pname = request.getParameter("pname");
+        String csname = request.getParameter("csname");
+        int page =Integer.parseInt(request.getParameter("ppcpage"));
+        String strPid = request.getParameter("pid");
+        Integer pid =null ;
+        if(StringUtils.isNotBlank(strPid)){
+             pid = Integer.parseInt(strPid);
+        }
+
+        pageInfo.setPage(page);
+        logger.info("开始查找根据名字查找商品并进行分页");
+        Page<ProductsEntity> products = productsEntityService.findByPidAndPnameAndCsname(pid,pname,csname,pageInfo);
+        map.put("page", products);
+        return "admin/product/list";
+    }
 }

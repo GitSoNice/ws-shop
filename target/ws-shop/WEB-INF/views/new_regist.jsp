@@ -107,47 +107,47 @@
                         <tr>
                             <th><span class="nessary">*</span>用户名:</th>
                             <td><form:input path="username" id="username"
-                                            class="inputText" maxlength="20" onblur="checkUsername()"/> <span
+                                            class="inputText" maxlength="20" onblur="checkUsername()"  placeholder="首字母必须大写"/> <span
                                     id="span1" style="padding-left: 10px;"></span></td>
                         </tr>
                         <tr>
                             <th><span class="nessary">*</span>密&nbsp;&nbsp;码:</th>
                             <td><form:password path="password" id="password" name="password"
-                                               class="inputText" maxlength="20"/></td>
+                                               class="inputText" maxlength="20"  placeholder="请输入密码"/></td>
                         </tr>
                         <tr>
                             <th><span class="nessary">*</span>确认密码:</th>
                             <td><input id="repassword" type="password"
-                                       name="repassword" class="inputText" maxlength="20"/></td>
+                                       name="repassword" class="inputText" maxlength="20"  placeholder="请重复输入密码"/></td>
                         </tr>
                         <tr>
                             <th><span class="nessary">*</span>E-mail:</th>
                             <td><form:input path="email" id="email"
-                                            class="inputText" maxlength="20"/>
+                                            class="inputText" maxlength="20" placeholder="请输入正确的邮箱地址"/>
                                 <form:errors path="email" cssClass="error"/>
                             </td>
                         </tr>
                         <tr>
                             <th>姓名:</th>
                             <td><form:input path="name" class="inputText"
-                                            maxlength="200"/></td>
+                                            maxlength="200" placeholder="请输入您的姓名"/></td>
                         </tr>
                         <tr>
                             <th><span class="nessary">*</span>年龄:</th>
                             <td><form:input path="age" id="age" class="inputText" type="number" min="1"
-                                            maxlength="3"/>
+                                            maxlength="3" placeholder="请输入您的年龄"/>
                                 <form:errors path="age" cssClass="error"/>
                             </td>
                         </tr>
                         <tr>
                             <th>电话:</th>
-                            <td><form:input path="phone" class="inputText"/>
+                            <td><form:input path="phone" class="inputText" placeholder="请输入您的电话"/>
                                 <form:errors path="phone" cssClass="error"/></td>
                         </tr>
                         <tr>
                             <th><span class="nessary">*</span>地址:</th>
                             <td><form:input path="addr" class="inputText" id="address"
-                                            maxlength="200"/></td>
+                                            maxlength="200" placeholder="请输入您的地址"/></td>
                         </tr>
                         <tr>
                             <th><span class="nessary">*</span>验证码:</th>

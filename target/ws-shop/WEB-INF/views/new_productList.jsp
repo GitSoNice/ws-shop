@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>登录</title>
+    <title>商品列表</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index-1.css" />
     <link href="${pageContext.request.contextPath}/css/userinfo.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/css/product.css" rel="stylesheet" type="text/css"/>
@@ -56,15 +56,10 @@
             <div id="result" class="result table clearfix">
                 <ul>
                     <c:forEach var="p" items="${page.content}">
-                        <li><a
-                                href="${ pageContext.request.contextPath }/findByPid/<c:out value="${p.pid}"/>">
-                            <img
-                                    src="${pageContext.request.contextPath}/<c:out value="${p.image}"/>"
-                                    width="170" height="170" style="display: inline-block;"/> <span
-                                style='color: green'> <c:out value="${p.pname}"/>
-								</span> <span class="price"> 商城价： ￥<c:out
-                                value="${p.shop_price}"/>
-								</span>
+                        <li><a href="${ pageContext.request.contextPath }/findByPid/<c:out value="${p.pid}"/>">
+                            <img src="${pageContext.request.contextPath}/<c:out value="${p.image}"/>" width="170" height="170" style="display: inline-block;"/>
+                            <span style='color: green'> <c:out value="${p.pname}"/> </span>
+                            <span class="price"> 商城价： ￥<c:out value="${p.shop_price}"/> </span>
                         </a></li>
                     </c:forEach>
                 </ul>
