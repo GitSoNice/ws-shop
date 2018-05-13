@@ -101,10 +101,41 @@
 				</tr>
 				<tr>
                     <ul class="pagination" style="float:right;">
+                        <c:if test="${pid == null} && ${pname == null } && ${csname == null}">
+                            <c:if test="${page.totalPages !=0 }">
+                                <li><a href="${pageContext.request.contextPath}/listProduct?propage=?ppage=0">&laquo;</a></li>
+                                <c:if test="${page.number+1 > 1 }">
+                                    <li><a href="${pageContext.request.contextPath}/listProduct?propage=${page.number-1 }">&lt;</a></li>
+                                </c:if>
+                                <c:forEach var="i" begin="1" end="${page.totalPages}">
+                                    <!-- 如果是当前页则不能够点击 -->
+                                    <c:if test="${i == page.number+1 }">
+                                        <li class="active"><a>${page.number +1}</a></li>
+                                    </c:if>
+
+                                    <c:if test="${i != page.number+1 }">
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/listProduct?propage=${i-1}">
+                                                <c:out value="${i}"/>
+                                            </a>
+                                        </li>
+                                    </c:if>
+                                </c:forEach>
+
+                                <!-- 下一页 -->
+                                <c:if test="${page.number+1 < page.totalPages }">
+                                    <li><a href="${pageContext.request.contextPath}/listProduct?propage=${page.number+1 }">&gt;</a></li>
+                                </c:if>
+
+                                <!-- 尾页 -->
+                                <li><a href="${pageContext.request.contextPath}/listProduct?ppcpage=${page.totalPages-1 }">&raquo;</a></li>
+                            </c:if>
+                        </c:if>
+
                         <c:if test="${page.totalPages !=0 }">
-                            <li><a href="${pageContext.request.contextPath}/listProduct?propage=?ppage=0">&laquo;</a></li>
+                            <li><a href="${pageContext.request.contextPath}/PidPnameCsname?ppcpage=0&pid=${pid}&pname=${pname}&csname=${csname}">&laquo;</a></li>
                             <c:if test="${page.number+1 > 1 }">
-                                <li><a href="${pageContext.request.contextPath}/listProduct?propage=${page.number-1 }">&lt;</a></li>
+                                <li><a href="${pageContext.request.contextPath}/PidPnameCsname?ppcpage=${page.number-1 }&pid=${pid}&pname=${pname}&csname=${csname}">&lt;</a></li>
                             </c:if>
                             <c:forEach var="i" begin="1" end="${page.totalPages}">
                                 <!-- 如果是当前页则不能够点击 -->
@@ -114,7 +145,7 @@
 
                                 <c:if test="${i != page.number+1 }">
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/listProduct?propage=${i-1}">
+                                        <a href="${pageContext.request.contextPath}/PidPnameCsname?ppcpage=${i-1}&pid=${pid}&pname=${pname}&csname=${csname}">
                                             <c:out value="${i}"/>
                                         </a>
                                     </li>
@@ -123,11 +154,11 @@
 
                             <!-- 下一页 -->
                             <c:if test="${page.number+1 < page.totalPages }">
-                                <li><a href="${pageContext.request.contextPath}/listProduct?propage=${page.number+1 }">&gt;</a></li>
+                                <li><a href="${pageContext.request.contextPath}/PidPnameCsname?ppcpage=${page.number+1 }&pid=${pid}&pname=${pname}&csname=${csname}">&gt;</a></li>
                             </c:if>
 
                             <!-- 尾页 -->
-                            <li><a href="${pageContext.request.contextPath}/listProduct?propage=${page.totalPages-1 }">&raquo;</a></li>
+                            <li><a href="${pageContext.request.contextPath}/PidPnameCsname?ppcpage=${page.totalPages-1 }&pid=${pid}&pname=${pname}&csname=${csname}">&raquo;</a></li>
                         </c:if>
                     </ul>
 				</tr>

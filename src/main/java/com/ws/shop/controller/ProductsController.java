@@ -329,14 +329,53 @@ public class ProductsController {
         int page =Integer.parseInt(request.getParameter("ppcpage"));
         String strPid = request.getParameter("pid");
         Integer pid =null ;
-        if(StringUtils.isNotBlank(strPid)){
-             pid = Integer.parseInt(strPid);
-        }
-
         pageInfo.setPage(page);
-        logger.info("开始查找根据名字查找商品并进行分页");
-        Page<ProductsEntity> products = productsEntityService.findByPidAndPnameAndCsname(pid,pname,csname,pageInfo);
-        map.put("page", products);
+        if(StringUtils.isNotBlank(strPid)){
+            pid = Integer.parseInt(strPid);
+            logger.info("开始查找根据名字查找商品并进行分页");
+            Page<ProductsEntity> products = productsEntityService.findByPidAndPnameAndCsname(pid,pname,csname,pageInfo);
+            map.put("page", products);
+        }else{
+            logger.info("开始查找根据名字查找商品并进行分页");
+            Page<ProductsEntity> products = productsEntityService.findByPnameAndCsname(pname,csname,pageInfo);
+            map.put("page", products);
+        }
+        map.put("pid",pid);
+        map.put("pname",pname);
+        map.put("csname",csname);
+        return "admin/product/list";
+    }
+
+    /**
+     * 根据商品id，商品名字，二级分类查找商品并分页
+     * @param map
+     * @param pageInfo
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/PidPnameCsname")
+    public String findPidPnameCsname(ModelMap map , PageInfo pageInfo,HttpServletRequest request) throws UnsupportedEncodingException {
+        String pname = request.getParameter("pname");
+        pname = new String(pname.getBytes("ISO8859-1"), "UTF-8");
+        String csname = request.getParameter("csname");
+        csname = new String(csname.getBytes("ISO8859-1"), "UTF-8");
+        int page =Integer.parseInt(request.getParameter("ppcpage"));
+        String strPid = request.getParameter("pid");
+        Integer pid =null ;
+        pageInfo.setPage(page);
+        if(StringUtils.isNotBlank(strPid)){
+            pid = Integer.parseInt(strPid);
+            logger.info("开始查找根据名字查找商品并进行分页");
+            Page<ProductsEntity> products = productsEntityService.findByPidAndPnameAndCsname(pid,pname,csname,pageInfo);
+            map.put("page", products);
+        }else{
+            logger.info("开始查找根据名字查找商品并进行分页");
+            Page<ProductsEntity> products = productsEntityService.findByPnameAndCsname(pname,csname,pageInfo);
+            map.put("page", products);
+        }
+        map.put("pid",pid);
+        map.put("pname",pname);
+        map.put("csname",csname);
         return "admin/product/list";
     }
 }

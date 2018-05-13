@@ -18,7 +18,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         HttpSession session = httpServletRequest.getSession();
         UserEntity user = (UserEntity) session.getAttribute("user");
         if(user == null){
-            httpServletResponse.sendRedirect("/WEB-INF/views/login.jsp");
+            httpServletResponse.sendRedirect("/WEB-INF/views/new_login.jsp");
             return false;
         }
         return true;
