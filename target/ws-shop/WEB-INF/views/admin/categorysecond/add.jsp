@@ -5,52 +5,56 @@
 		<meta http-equiv="Content-Language" content="zh-cn">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<LINK href="${pageContext.request.contextPath}/css/Style1.css" type="text/css" rel="stylesheet">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/index-1.css" />
+		<!--[if lt IE 9]>
+		<script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+		<script type="text/javascript"
+				src="${pageContext.request.contextPath}/js/jquery.js"></script>
+		<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 	</HEAD>
 	<body>
 		<form id="userAction_save_do" name="Form1" action="${pageContext.request.contextPath}/addCategorySecond" method="post">
 			&nbsp;
-			<table cellSpacing="1" cellPadding="5" width="100%" align="center" bgColor="#eeeeee" style="border: 1px solid #8ba7e3" border="0">
-				<tr>
-					<td class="ta_01" align="center" bgColor="#afd1f3" colSpan="4"
-						height="26">
-						<strong><STRONG>添加二级分类</STRONG>
-						</strong>
+			<table class="table">
+				<thead>
+				<tr style="text-align:center;font-size:20px;font-weight: bold;">
+					<td style="font-size:16px;">添加二级分类</td>
+				</tr>
+				</thead>
+				<tbody>
+				<tr style="text-align:center;">
+					<td style="font-size:20px;">
+						二级分类名称：<input type="text" name="csname" value="" id="userAction_save_do_logonName"/>
 					</td>
 				</tr>
-				<tr>
-					<td width="18%" align="center" bgColor="#f5fafe" class="ta_01">
-						二级分类名称：
-					</td>
-					<td class="ta_01" bgColor="#ffffff" >
-						<input type="text" name="csname" value="" id="userAction_save_do_logonName" class="bg"/>
-					</td>
-					<td width="18%" align="center" bgColor="#f5fafe" class="ta_01">
+				<tr style="text-align:center;">
+					<td style="font-size:20px;">
 						所属的一级分类：
-					</td>
-					<td class="ta_01" bgColor="#ffffff" >
 						<select name="cid">
 							<c:forEach items="${categorys}" var="c">
-							  		<option value="${c.cid }"/><c:out value="${c.cname }" />
+								<option value="${c.cid }"/><c:out value="${c.cname }" />
 							</c:forEach>
 						</select>
 					</td>
 				</tr>
-			
 				<tr>
-					<td class="ta_01" style="WIDTH: 100%" align="center"
-						bgColor="#f5fafe" colSpan="4">
-						<button type="submit" id="userAction_save_do_submit" value="确定" class="button_ok">
+					<td width="100%" style="text-align:center;">
+						<button type="submit" id="userAction_save_do_submit" value="确定" class="btn btn-primary">
 							&#30830;&#23450;
 						</button>
 
 						<FONT face="宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
-						<button type="reset" value="重置" class="button_cancel">&#37325;&#32622;</button>
+						<button type="reset" value="重置" class="btn btn-primary">&#37325;&#32622;</button>
 
 						<FONT face="宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
-						<INPUT class="button_ok" type="button" onclick="history.go(-1)" value="返回"/>
+						<INPUT class="btn btn-primary" type="button" onclick="history.go(-1)" value="返回"/>
 						<span id="Label1"></span>
 					</td>
 				</tr>
+				</tbody>
 			</table>
 		</form>
 	</body>

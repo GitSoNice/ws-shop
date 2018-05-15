@@ -46,8 +46,8 @@
     </div>
 		<table class="table">
 			<tbody>
-				<tr>
-                    <td><strong>商品列表</strong></td>
+				<tr style="text-align:center;font-size:20px;font-weight: bold;">
+                    <td style="font-size:16px;">商品列表</td>
 				</tr>
 
 				<tr>
