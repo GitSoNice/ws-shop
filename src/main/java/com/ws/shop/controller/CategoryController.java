@@ -2,9 +2,11 @@ package com.ws.shop.controller;
 
 import com.ws.shop.bean.PageInfo;
 import com.ws.shop.entity.CategoryEntity;
+import com.ws.shop.entity.ProductsEntity;
 import com.ws.shop.service.AdminEntityService;
 import com.ws.shop.service.CategoryEntityService;
 import com.ws.shop.utils.ActionResult;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 /**
@@ -139,6 +142,63 @@ public class CategoryController {
         return modelAndView;
     }
 
+    /**
+     * 根据商品id，商品名字，二级分类查找商品并分页
+     * @param map
+     * @param pageInfo
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/findByCidAndCname")
+    public String findByCidAndCname(ModelMap map , PageInfo pageInfo,HttpServletRequest request) throws UnsupportedEncodingException {
+        String cname = request.getParameter("cname");
+        int page =Integer.parseInt(request.getParameter("catecpage"));
+        String strCid = request.getParameter("cid");
+        Integer cid =null ;
+        pageInfo.setPage(page);
+        if(StringUtils.isNotBlank(strCid)){
+            cid = Integer.parseInt(strCid);
+            logger.info("开始查找根据名字查找商品并进行分页");
+            Page<CategoryEntity> category = categoryEntityService.findByCidAndCname(cid,cname,pageInfo);
+            map.put("page", category);
+        }else{
+            logger.info("开始查找根据名字查找商品并进行分页");
+            Page<CategoryEntity> category = categoryEntityService.findByCname(cname,pageInfo);
+            map.put("page", category);
+        }
+        map.put("cid",cid);
+        map.put("cname",cname);
+        return "admin/category/list";
+    }
 
+    /**
+     * 根据商品id，商品名字，二级分类查找商品并分页
+     * @param map
+     * @param pageInfo
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/findByCidAndCname1")
+    public String findByCidAndCname1(ModelMap map , PageInfo pageInfo,HttpServletRequest request) throws UnsupportedEncodingException {
+        String cname = request.getParameter("cname");
+        cname = new String(cname.getBytes("ISO8859-1"), "UTF-8");
+        int page =Integer.parseInt(request.getParameter("catecpage"));
+        String strCid = request.getParameter("cid");
+        Integer cid =null ;
+        pageInfo.setPage(page);
+        if(StringUtils.isNotBlank(strCid)){
+            cid = Integer.parseInt(strCid);
+            logger.info("开始查找根据名字查找商品并进行分页");
+            Page<CategoryEntity> category = categoryEntityService.findByCidAndCname(cid,cname,pageInfo);
+            map.put("page", category);
+        }else{
+            logger.info("开始查找根据名字查找商品并进行分页");
+            Page<CategoryEntity> category = categoryEntityService.findByCname(cname,pageInfo);
+            map.put("page", category);
+        }
+        map.put("cid",cid);
+        map.put("cname",cname);
+        return "admin/category/list";
+    }
 }
 

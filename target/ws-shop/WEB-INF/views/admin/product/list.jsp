@@ -31,15 +31,42 @@
 		});
 	});
 </script>
+<style>
+    .inputText {
+        width: 200px;
+        height: 26px;
+        line-height: 26px;
+        padding: 0px 4px;
+        color: #666666;
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        border-radius: 5px;
+        border: 1px solid;
+        border-color: #b8b8b8 #dcdcdc #dcdcdc #b8b8b8;
+    }
+
+    .inputText:hover {
+        -webkit-transition: box-shadow linear 0.2s;
+        -moz-transition: box-shadow linear 0.2s;
+        -ms-transition: box-shadow linear 0.2s;
+        -o-transition: box-shadow linear 0.2s;
+        transition: box-shadow linear 0.2s;
+        -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+        -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+        border: 1px solid #74b9ef;
+        background: white;
+    }
+</style>
 </HEAD>
 <body>
 	<br>
-    <div>
+    <div style="padding-left:50px;">
         <form action="${pageContext.request.contextPath}/findByPidAndPnameAndCsname?ppcpage=0" method="post">
-                    商品编号<input type="text" id="pid" name="pid" placeholder="商品编号"/>
-                    商品名称<input type="text" id="pname" name="pname" placeholder="商品名"/>
-                    二级分类名称<input type="text" id="csname" name="csname" placeholder="二级分类名"/>
-                    <input type="submit" value="查询" class="btn btn-primary" />
+                    商品编号<input type="text" id="pid" name="pid" placeholder="商品编号" class="inputText" style="margin-right: 20px;"/>
+                    商品名称<input type="text" id="pname" name="pname" placeholder="商品名" class="inputText" style="margin-right: 20px;"/>
+                    二级分类名称<input type="text" id="csname" name="csname" placeholder="二级分类名" class="inputText" style="margin-right: 20px;"/>
+                    <input type="submit" value="查询" class="btn btn-primary" style="margin-right: 10px;" />
                     <button type="button" id="add" name="add" value="添加" class="btn btn-primary" onclick="addProduct()">
                         &#28155;&#21152;</button>
         </form>
@@ -53,22 +80,22 @@
 				<tr>
                     <table class="table" >
                         <thead>
-                            <tr>
-                                <td>序号</td>
-                                <td>商品编号</td>
-                                <td>二级分类</td>
-                                <td>商品图片</td>
-                                <td>商品名称</td>
-                                <td>商品价格</td>
-                                <td>库存量</td>
-                                <td>是否热门</td>
-                                <td>编辑</td>
-                                <td>删除</td>
+                            <tr style="text-align:center;">
+                                <td style="font-size:14px;">序号</td>
+                                <td style="font-size:14px;">商品编号</td>
+                                <td style="font-size:14px;">二级分类</td>
+                                <td style="font-size:14px;">商品图片</td>
+                                <td style="font-size:14px;">商品名称</td>
+                                <td style="font-size:14px;">商品价格</td>
+                                <td style="font-size:14px;">库存量</td>
+                                <td style="font-size:14px;">是否热门</td>
+                                <td style="font-size:14px;">编辑</td>
+                                <td style="font-size:14px;">删除</td>
                             </tr>
                         </thead>
                         <tbody>
                             <c:forEach var="p" items="${page.content}" varStatus="vs">
-                                <tr onmouseover="this.style.backgroundColor = 'white'"
+                                <tr style="text-align:center;" onmouseover="this.style.backgroundColor = 'white'"
                                     onmouseout="this.style.backgroundColor = '#F5FAFE';">
                                     <td><c:out value="${vs.index+1}"></c:out></td>
                                     <td><c:out value="${p.pid}" /></td>
@@ -101,9 +128,9 @@
 				</tr>
 				<tr>
                     <ul class="pagination" style="float:right;">
-                        <c:if test="${pid == null} && ${pname == null } && ${csname == null}">
+                        <c:if test="${pid == null} && ${pname == '' } && ${csname == ''}">
                             <c:if test="${page.totalPages !=0 }">
-                                <li><a href="${pageContext.request.contextPath}/listProduct?propage=?ppage=0">&laquo;</a></li>
+                                <li><a href="${pageContext.request.contextPath}/listProduct?propage=0">&laquo;</a></li>
                                 <c:if test="${page.number+1 > 1 }">
                                     <li><a href="${pageContext.request.contextPath}/listProduct?propage=${page.number-1 }">&lt;</a></li>
                                 </c:if>

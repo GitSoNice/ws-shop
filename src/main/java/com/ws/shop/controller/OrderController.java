@@ -7,6 +7,7 @@ import com.ws.shop.entity.*;
 import com.ws.shop.service.OrderEntityService;
 import com.ws.shop.service.ProductsEntityService;
 import com.ws.shop.service.WalletEntityService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Map;
@@ -260,4 +262,52 @@ public class OrderController {
         ModelAndView model = new ModelAndView("redirect:/findOrderByUid?uopage=0");
         return model;
     }
+
+    /**
+     * 根据商品id，商品名字，二级分类查找商品并分页
+     * @param map
+     * @param pageInfo
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/findByOidAndUid")
+    public String findByOidAndUid(ModelMap map , PageInfo pageInfo,HttpServletRequest request) throws UnsupportedEncodingException {
+        String strOid = request.getParameter("oid");
+        int page =Integer.parseInt(request.getParameter("oupage"));
+        String strUid = request.getParameter("uid");
+        Integer oid =null ;
+        Integer uid =null ;
+        pageInfo.setPage(page);
+        if(StringUtils.isBlank(strOid)&&StringUtils.isBlank(strUid)){
+            Page<OrdersEntity> ordersEntity = orderEntityService.SearchOrders(pageInfo);
+            map.put("page", ordersEntity);
+            return "admin/order/list";
+        }
+        if(StringUtils.isNotBlank(strOid)&&StringUtils.isNotBlank(strUid)){
+            oid = Integer.parseInt(strOid);
+            uid = Integer.parseInt(strUid);
+            logger.info("开始查找根据订单编号和用户编号查找订单并进行分页");
+            Page<OrdersEntity> orders = orderEntityService.findByOidAndUid(oid,uid,pageInfo);
+            map.put("page", orders);
+            map.put("oid",oid);
+            map.put("uid",uid);
+            return "admin/order/list";
+        }
+        if(StringUtils.isNotBlank(strUid)){
+            logger.info("开始查找根据用户编号查找订单并进行分页");
+            uid = Integer.parseInt(strUid);
+            Page<OrdersEntity> orders = orderEntityService.adminFindByUid(uid,pageInfo);
+            map.put("page", orders);
+        }
+        if(StringUtils.isNotBlank(strOid)){
+            logger.info("开始查找根据订单编号查找订单并进行分页");
+            oid = Integer.parseInt(strOid);
+            Page<OrdersEntity> orders = orderEntityService.adminFindByOid(oid,pageInfo);
+            map.put("page", orders);
+        }
+        map.put("oid",oid);
+        map.put("uid",uid);
+        return "admin/order/list";
+    }
+
 }

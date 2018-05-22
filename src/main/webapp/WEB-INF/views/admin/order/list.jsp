@@ -8,6 +8,17 @@
 	rel="stylesheet" type="text/css" />
 <script language="javascript"
 	src="${pageContext.request.contextPath}/js/public.js"></script>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/index-1.css" />
+	<link href="${pageContext.request.contextPath}/css/userinfo.css"
+		  rel="stylesheet" type="text/css"/>
+	<!--[if lt IE 9]>
+	<script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script type="text/javascript"
+			src="${pageContext.request.contextPath}/js/jquery.js"></script>
+	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 <script type="text/javascript">
 			function showDetail(oid){
 				var but = document.getElementById("but"+oid);
@@ -54,87 +65,164 @@
 					return xmlHttp;
 				 }
 		</script>
+	<style>
+		.inputText {
+			width: 200px;
+			height: 26px;
+			line-height: 26px;
+			padding: 0px 4px;
+			color: #666666;
+			-webkit-border-radius: 2px;
+			-moz-border-radius: 2px;
+			border-radius: 5px;
+			border: 1px solid;
+			border-color: #b8b8b8 #dcdcdc #dcdcdc #b8b8b8;
+		}
+
+		.inputText:hover {
+			-webkit-transition: box-shadow linear 0.2s;
+			-moz-transition: box-shadow linear 0.2s;
+			-ms-transition: box-shadow linear 0.2s;
+			-o-transition: box-shadow linear 0.2s;
+			transition: box-shadow linear 0.2s;
+			-webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+			-moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+			box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+			border: 1px solid #74b9ef;
+			background: white;
+		}
+	</style>
 </HEAD>
 <body>
 	<br>
-	<form id="Form1" name="Form1"
-		action="${pageContext.request.contextPath}/user/list.jsp"
-		method="post">
-		<table cellSpacing="1" cellPadding="0" width="100%" align="center"
-			bgColor="#f5fafe" border="0">
-			<TBODY>
-				<tr>
-					<td class="ta_01" align="center" bgColor="#afd1f3">
-						<strong>订单列表</strong>
-					</td>
-				</tr>
-				<tr>
-					<td class="ta_01" align="center" bgColor="#f5fafe">
-						<table cellspacing="0" cellpadding="1" rules="all" bordercolor="gray" border="1" id="DataGrid1" style="BORDER-RIGHT: gray 1px solid; BORDER-TOP: gray 1px solid; BORDER-LEFT: gray 1px solid; WIDTH: 100%; WORD-BREAK: break-all; BORDER-BOTTOM: gray 1px solid; BORDER-COLLAPSE: collapse; BACKGROUND-COLOR: #f5fafe; WORD-WRAP: break-word">
-							<tr style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3">
-								<td align="center" width="10%">订单编号</td>
-								<td align="center" width="10%">订单时间</td>
-								<td align="center" width="10%">订单金额</td>
-								<td align="center" width="10%">收货人</td>
-								<td align="center" width="10%">订单状态</td>
-								<td align="center" width="10%">订单详情</td>
-								<td align="center" width="40%">删除</td>
+	<div style="padding-left:250px;">
+		<form action="${pageContext.request.contextPath}/findByOidAndUid?oupage=0" method="post">
+			订单编号<input type="text" id="oid" name="oid" placeholder="订单编号" class="inputText" style="margin-right: 20px;"/>
+			用户编号<input type="text" id="uid" name="uid" placeholder="用户编号" class="inputText" style="margin-right: 20px;"/>
+			<input type="submit" value="查询" class="btn btn-primary" style="margin-right: 10px;" />
+		</form>
+	</div>
+		<table class="table">
+			<tbody>
+			<tr style="text-align:center;font-size:20px;font-weight: bold;">
+				<td style="font-size:16px;">订单列表</td>
+			</tr>
+
+			<tr>
+				<table class="table">
+					<thead>
+						<tr style="text-align:center;">
+							<td style="font-size:14px;">订单编号</td>
+							<td style="font-size:14px;">订单时间</td>
+							<td style="font-size:14px;">订单金额</td>
+							<td style="font-size:14px;">收货人</td>
+							<td style="font-size:14px;">收货地址</td>
+							<td style="font-size:14px;">联系电话</td>
+							<td style="font-size:14px;">订单状态</td>
+							<td style="font-size:14px;">订单详情</td>
+							<td style="font-size:14px;">删除</td>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="o" items="${page.content}">
+							<tr style="text-align:center;" onmouseover="this.style.backgroundColor = 'white'"
+								onmouseout="this.style.backgroundColor = '#F5FAFE';">
+								<td><c:out value="${o.oid }" /></td>
+								<td><c:out value="${o.ordertime }" /></td>
+								<td><c:out value="${o.total }" /></td>
+								<td><c:out value="${o.name }" /></td>
+								<td><c:out value="${o.addr }" /></td>
+								<td><c:out value="${o.phone }" /></td>
+								<td><c:if test="${o.state==1}">
+												未付款
+											</c:if> <c:if test="${o.state==2}">
+										<a href="${ pageContext.request.contextPath }/updateStateOrder/<c:out value="${o.oid }"/>">
+											<font color="blue">发货</font>
+										</a>
+									</c:if> <c:if test="${o.state==3}">
+												等待确认收货
+											</c:if> <c:if test="${o.state==4}">
+												订单完成
+											</c:if>
+								<td>
+								<input type="button" value="订单详情" id="but<c:out value="${o.oid }"/>" onclick="showDetail(<c:out value="${o.oid }"/>)" />
+									<div id="div<c:out value="${o.oid }"/>"></div></td>
+
+								<td>
+									<a id="delete" href="${ pageContext.request.contextPath }/deleteOrder/<c:out value="${o.oid}"/>">
+										<img src="${pageContext.request.contextPath}/images/i_del.gif" width="16" height="16" border="0" style="CURSOR: hand">
+									</a>
+								</td>
 							</tr>
-							<c:forEach var="o" items="${page.content}">
-								<tr onmouseover="this.style.backgroundColor = 'white'"
-									onmouseout="this.style.backgroundColor = '#F5FAFE';">
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="17%"><c:out value="${o.oid }" /></td>
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="17%"><c:out value="${o.ordertime }" /></td>										
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="17%"><c:out value="${o.total }" /></td>
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="17%"><c:out value="${o.name }" /></td>
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="17%"><c:if test="${o.state==1}">
-													未付款
-												</c:if> <c:if test="${o.state==2}">
-											<a href="${ pageContext.request.contextPath }/updateStateOrder/<c:out value="${o.oid }"/>">
-												<font color="blue">发货</font>
-											</a>
-										</c:if> <c:if test="${o.state==3}">
-													等待确认收货
-												</c:if> <c:if test="${o.state==4}">
-													订单完成
-												</c:if>
-									<td align="center" style="HEIGHT: 22px">
-									<input type="button" value="订单详情" id="but<c:out value="${o.oid }"/>"
-										onclick="showDetail(<c:out value="${o.oid }"/>)" />
-										<div id="div<c:out value="${o.oid }"/>"></div></td>
-										
-									<td align="center" style="HEIGHT: 22px"><a id="delete"
-										href="${ pageContext.request.contextPath }/deleteOrder/<c:out value="${o.oid}"/>">
-											<img
-											src="${pageContext.request.contextPath}/images/i_del.gif"
-											width="16" height="16" border="0" style="CURSOR: hand">
-									</a></td>
-								</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</tr>
+			<tr>
+				<ul class="pagination" style="float:right;">
+					<c:if test="${oid == null} && ${uid == null }">
+						<c:if test="${page.totalPages !=0 }">
+							<li><a href="${pageContext.request.contextPath}/listOrder?opage=0">&laquo;</a></li>
+							<c:if test="${page.number+1 > 1 }">
+								<li><a href="${pageContext.request.contextPath}/listOrder?opage=${page.number-1 }">&lt;</a></li>
+							</c:if>
+							<c:forEach var="i" begin="1" end="${page.totalPages}">
+								<!-- 如果是当前页则不能够点击 -->
+								<c:if test="${i == page.number+1 }">
+									<li class="active"><a>${page.number +1}</a></li>
+								</c:if>
+
+								<c:if test="${i != page.number+1 }">
+									<li>
+										<a href="${pageContext.request.contextPath}/listOrder?opage=${i-1}">
+											<c:out value="${i}"/>
+										</a>
+									</li>
+								</c:if>
 							</c:forEach>
-						</table>
-					</td>
-				</tr>
-				<tr align="center">
-					<td colspan="7">
-						第<c:out value="${page.number+1}" />/<c:out value="${page.totalPages}"/>页
-						<a href="listOrder?opage=0"/>首页</a>|
+
+							<!-- 下一页 -->
+							<c:if test="${page.number+1 < page.totalPages }">
+								<li><a href="${pageContext.request.contextPath}/listOrder?opage=${page.number+1 }">&gt;</a></li>
+							</c:if>
+
+							<!-- 尾页 -->
+							<li><a href="${pageContext.request.contextPath}/listOrder?opage=${page.totalPages-1 }">&raquo;</a></li>
+						</c:if>
+					</c:if>
+
+					<c:if test="${page.totalPages !=0 }">
+						<li><a href="${pageContext.request.contextPath}/findByOidAndUid?oupage=0&oid=${oid}&uid=${uid}">&laquo;</a></li>
 						<c:if test="${page.number+1 > 1 }">
-							<a href="${ pageContext.request.contextPath }/listOrder?opage=<c:out value="${page.number-1 }"/>">上一页</a>|
+							<li><a href="${pageContext.request.contextPath}/findByOidAndUid?oupage=${page.number-1 }&oid=${oid}&uid=${uid}">&lt;</a></li>
 						</c:if>
+						<c:forEach var="i" begin="1" end="${page.totalPages}">
+							<!-- 如果是当前页则不能够点击 -->
+							<c:if test="${i == page.number+1 }">
+								<li class="active"><a>${page.number +1}</a></li>
+							</c:if>
+
+							<c:if test="${i != page.number+1 }">
+								<li>
+									<a href="${pageContext.request.contextPath}/findByOidAndUid?oupage=${i-1}&oid=${oid}&uid=${uid}">
+										<c:out value="${i}"/>
+									</a>
+								</li>
+							</c:if>
+						</c:forEach>
+
+						<!-- 下一页 -->
 						<c:if test="${page.number+1 < page.totalPages }">
-							<a href="${ pageContext.request.contextPath }/listOrder?opage=<c:out value="${page.number+1 }"/>">下一页</a>|
+							<li><a href="${pageContext.request.contextPath}/findByOidAndUid?oupage=${page.number+1 }&oid=${oid}&uid=${uid}">&gt;</a></li>
 						</c:if>
-						<a href="${ pageContext.request.contextPath }/listOrder?opage=<c:out value="${page.totalPages-1 }"/>">尾页</a>|
-					</td>
-				</tr>
-			</TBODY>
+
+						<!-- 尾页 -->
+						<li><a href="${pageContext.request.contextPath}/findByOidAndUid?oupage=${page.totalPages-1 }&oid=${oid}&uid=${uid}">&raquo;</a></li>
+					</c:if>
+				</ul>
+			</tr>
+			</tbody>
 		</table>
-	</form>
 </body>
 </HTML>
 

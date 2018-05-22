@@ -101,7 +101,7 @@
                         </ul>
                     </li>
                     <li ><a href="${ pageContext.request.contextPath }/quit"><span class="glyphicon glyphicon-off text-danger" ></span>  退出</a></li>
-                     <li><a href="${pageContext.request.contextPath}/myCart"><span class="glyphicon glyphicon-shopping-cart" ></span>购物车</a></li>
+                     <li><a href="${pageContext.request.contextPath}/myCart"><span class="glyphicon glyphicon-shopping-cart text-danger" ></span>购物车</a></li>
                  </ul>
             </c:if>
         </div>

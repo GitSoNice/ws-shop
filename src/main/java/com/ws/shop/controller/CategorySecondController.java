@@ -3,9 +3,11 @@ package com.ws.shop.controller;
 import com.ws.shop.bean.PageInfo;
 import com.ws.shop.entity.CategoryEntity;
 import com.ws.shop.entity.CategorySecondEntity;
+import com.ws.shop.entity.ProductsEntity;
 import com.ws.shop.service.CategoryEntityService;
 import com.ws.shop.service.CategorySecondEntityService;
 import com.ws.shop.utils.ActionResult;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
@@ -146,6 +149,70 @@ public class CategorySecondController {
         pageInfo.setPage(page);
         Page<CategorySecondEntity> categorySecondEntity = categorySecondEntityService.SearchCategorySeconds(pageInfo);
         map.put("page", categorySecondEntity);
+        return "admin/categorysecond/list";
+    }
+
+    /**
+     * 根据csid，csname，cname查找二级分类并分页
+     * @param map
+     * @param pageInfo
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/findByCsidAndCsnameAndCname")
+    public String findByCsidAndCsnameAndCname(ModelMap map , PageInfo pageInfo,HttpServletRequest request) throws UnsupportedEncodingException {
+        String cname = request.getParameter("cname");
+        String csname = request.getParameter("csname");
+        int page =Integer.parseInt(request.getParameter("cccpage"));
+        String strCsid = request.getParameter("csid");
+        Integer csid =null ;
+        pageInfo.setPage(page);
+        if(StringUtils.isNotBlank(strCsid)){
+            csid = Integer.parseInt(strCsid);
+            logger.info("开始查找根据名字查找商品并进行分页");
+            Page<CategorySecondEntity> categorySeconds = categorySecondEntityService.findByCsidAndCsnameAndCname(csid,csname,cname,pageInfo);
+            map.put("page", categorySeconds);
+        }else{
+            logger.info("开始查找根据名字查找商品并进行分页");
+            Page<CategorySecondEntity> categorySeconds = categorySecondEntityService.findByCsnameAndCname(csname,cname,pageInfo);
+            map.put("page", categorySeconds);
+        }
+        map.put("csid",csid);
+        map.put("csname",csname);
+        map.put("cname",cname);
+        return "admin/categorysecond/list";
+    }
+
+    /**
+     * 根据csid，csname，cname查找二级分类并分页
+     * @param map
+     * @param pageInfo
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/findByCsidAndCsnameAndCname1")
+    public String findByCsidAndCsnameAndCname1(ModelMap map , PageInfo pageInfo,HttpServletRequest request) throws UnsupportedEncodingException {
+        String cname = request.getParameter("cname");
+        cname = new String(cname.getBytes("ISO8859-1"), "UTF-8");
+        String csname = request.getParameter("csname");
+        csname = new String(csname.getBytes("ISO8859-1"), "UTF-8");
+        int page =Integer.parseInt(request.getParameter("cccpage"));
+        String strCsid = request.getParameter("csid");
+        Integer csid =null ;
+        pageInfo.setPage(page);
+        if(StringUtils.isNotBlank(strCsid)){
+            csid = Integer.parseInt(strCsid);
+            logger.info("开始查找根据名字查找商品并进行分页");
+            Page<CategorySecondEntity> categorySeconds = categorySecondEntityService.findByCsidAndCsnameAndCname(csid,csname,cname,pageInfo);
+            map.put("page", categorySeconds);
+        }else{
+            logger.info("开始查找根据名字查找商品并进行分页");
+            Page<CategorySecondEntity> categorySeconds = categorySecondEntityService.findByCsnameAndCname(csname,cname,pageInfo);
+            map.put("page", categorySeconds);
+        }
+        map.put("csid",csid);
+        map.put("csname",csname);
+        map.put("cname",cname);
         return "admin/categorysecond/list";
     }
 }

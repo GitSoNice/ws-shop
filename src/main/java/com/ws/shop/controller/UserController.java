@@ -1,14 +1,18 @@
 package com.ws.shop.controller;
 
+import com.ws.shop.bean.PageInfo;
+import com.ws.shop.entity.ProductsEntity;
 import com.ws.shop.utils.ActionResult;
 import com.ws.shop.utils.MD5;
 import com.ws.shop.entity.UserEntity;
 import com.ws.shop.service.UserEntityService;
 import com.ws.shop.utils.MailUtil;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -21,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
@@ -395,4 +400,43 @@ public class UserController {
             map.put("updateSuccess","failed");
             return "redirect:finduserInfo";
         }
+
+    /**
+     * 根据用户名查找用户并分页
+     * @param map
+     * @param pageInfo
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/findByUserName")
+    public String findByUserName(ModelMap map , PageInfo pageInfo, HttpServletRequest request) throws UnsupportedEncodingException {
+        String username = request.getParameter("username");
+        int page =Integer.parseInt(request.getParameter("uupage"));
+        pageInfo.setPage(page);
+        logger.info("开始查找根据用户名查找用户并进行分页");
+        Page<UserEntity> users = userEntityService.findByUserName(username,pageInfo);
+        map.put("page", users);
+        map.put("username",username);
+        return "admin/user/list";
+    }
+
+    /**
+     * 根据用户名查找用户并分页
+     * @param map
+     * @param pageInfo
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/findByUserName1")
+    public String findByUserName1(ModelMap map , PageInfo pageInfo, HttpServletRequest request) throws UnsupportedEncodingException {
+        String username = request.getParameter("username");
+        username = new String(username.getBytes("ISO8859-1"), "UTF-8");
+        int page =Integer.parseInt(request.getParameter("uupage"));
+        pageInfo.setPage(page);
+        logger.info("开始查找根据用户名查找用户并进行分页");
+        Page<UserEntity> users = userEntityService.findByUserName(username,pageInfo);
+        map.put("page", users);
+        map.put("username",username);
+        return "admin/user/list";
+    }
 }
