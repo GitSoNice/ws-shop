@@ -72,13 +72,13 @@
 					<table class="table">
 						<thead>
 							<tr style="text-align:center;">
-								<td style="font-size:14px;">序号</td>
-								<td style="font-size:14px;">一级分类编号</td>
-								<td style="font-size:14px;">一级分类名称</td>
-								<td style="font-size:14px;">折扣</td>
-								<td style="font-size:14px;">优惠时间</td>
-								<td style="font-size:14px;">编辑</td>
-								<td style="font-size:14px;">删除</td>
+								<td style="font-size:14px;font-weight: bold;">序号</td>
+								<td style="font-size:14px;font-weight: bold;">一级分类编号</td>
+								<td style="font-size:14px;font-weight: bold;">一级分类名称</td>
+								<td style="font-size:14px;font-weight: bold;">折扣</td>
+								<td style="font-size:14px;font-weight: bold;">优惠时间</td>
+								<td style="font-size:14px;font-weight: bold;">编辑</td>
+								<td style="font-size:14px;font-weight: bold;">删除</td>
 							</tr>
 						</thead>
 						<tbody>

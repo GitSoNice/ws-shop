@@ -44,6 +44,11 @@
 				background: white;
 			}
 		</style>
+		<script type="text/javascript">
+            function exportUser() {
+                window.location.href = "${pageContext.request.contextPath}/exportUser";
+            }
+		</script>
 	</HEAD>
 	<body>
 		<br>
@@ -51,6 +56,8 @@
 			<form action="${pageContext.request.contextPath}/findByUserName?uupage=0" method="post">
 				用户名<input type="text" id="username" name="username" placeholder="用户名" class="inputText" style="margin-right: 20px;"/>
 				<input type="submit" value="查询" class="btn btn-primary" style="margin-right: 10px;" />
+				<button type="button" id="export" name="export" value="导出Excel" class="btn btn-primary" onclick="exportUser()">
+					导出Excel</button>
 			</form>
 		</div>
 			<table class="table">
@@ -62,14 +69,14 @@
 							<table class="table">
 								<thead>
 									<tr style="text-align:center;">
-										<td style="font-size:14px;">序号</td>
-										<td style="font-size:14px;">用户编号</td>
-										<td style="font-size:14px;">用户名</td>
-										<td style="font-size:14px;">真实姓名</td>
-										<td style="font-size:14px;">邮箱</td>
-										<td style="font-size:14px;">联系电话</td>
-										<td style="font-size:14px;">联系地址</td>
-										<td style="font-size:14px;">编辑</td>
+										<td style="font-size:14px;font-weight: bold;">序号</td>
+										<td style="font-size:14px;font-weight: bold;">用户编号</td>
+										<td style="font-size:14px;font-weight: bold;">用户名</td>
+										<td style="font-size:14px;font-weight: bold;">真实姓名</td>
+										<td style="font-size:14px;font-weight: bold;">邮箱</td>
+										<td style="font-size:14px;font-weight: bold;">联系电话</td>
+										<td style="font-size:14px;font-weight: bold;">联系地址</td>
+										<td style="font-size:14px;font-weight: bold;">编辑</td>
 									</tr>
 								</thead>
 								<tbody>

@@ -64,6 +64,10 @@
 
 					return xmlHttp;
 				 }
+
+            function exportExcel() {
+                window.location.href = "${pageContext.request.contextPath}/exportOrders";
+            }
 		</script>
 	<style>
 		.inputText {
@@ -100,6 +104,8 @@
 			订单编号<input type="text" id="oid" name="oid" placeholder="订单编号" class="inputText" style="margin-right: 20px;"/>
 			用户编号<input type="text" id="uid" name="uid" placeholder="用户编号" class="inputText" style="margin-right: 20px;"/>
 			<input type="submit" value="查询" class="btn btn-primary" style="margin-right: 10px;" />
+			<button type="button" id="export" name="export" value="导出Excel" class="btn btn-primary" onclick="exportExcel()">
+				导出Excel</button>
 		</form>
 	</div>
 		<table class="table">
@@ -112,15 +118,15 @@
 				<table class="table">
 					<thead>
 						<tr style="text-align:center;">
-							<td style="font-size:14px;">订单编号</td>
-							<td style="font-size:14px;">订单时间</td>
-							<td style="font-size:14px;">订单金额</td>
-							<td style="font-size:14px;">收货人</td>
-							<td style="font-size:14px;">收货地址</td>
-							<td style="font-size:14px;">联系电话</td>
-							<td style="font-size:14px;">订单状态</td>
-							<td style="font-size:14px;">订单详情</td>
-							<td style="font-size:14px;">删除</td>
+							<td style="font-size:14px;font-weight: bold;">订单编号</td>
+							<td style="font-size:14px;font-weight: bold;">订单时间</td>
+							<td style="font-size:14px;font-weight: bold;">订单金额</td>
+							<td style="font-size:14px;font-weight: bold;">收货人</td>
+							<td style="font-size:14px;font-weight: bold;">收货地址</td>
+							<td style="font-size:14px;font-weight: bold;">联系电话</td>
+							<td style="font-size:14px;font-weight: bold;">订单状态</td>
+							<td style="font-size:14px;font-weight: bold;">订单详情</td>
+							<td style="font-size:14px;font-weight: bold;">删除</td>
 						</tr>
 					</thead>
 					<tbody>

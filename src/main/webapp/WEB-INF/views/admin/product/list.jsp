@@ -23,6 +23,11 @@
 	function addProduct() {
 		window.location.href = "${pageContext.request.contextPath}/gotoAddProduct";
 	}
+
+    function exportExcel() {
+        window.location.href = "${pageContext.request.contextPath}/exportProducts";
+    }
+
 	$(function(){
 		$("#delete").click(function() {
 			if(! confirm("你真的确定要删除?")){				
@@ -67,8 +72,10 @@
                     商品名称<input type="text" id="pname" name="pname" placeholder="商品名" class="inputText" style="margin-right: 20px;"/>
                     二级分类名称<input type="text" id="csname" name="csname" placeholder="二级分类名" class="inputText" style="margin-right: 20px;"/>
                     <input type="submit" value="查询" class="btn btn-primary" style="margin-right: 10px;" />
-                    <button type="button" id="add" name="add" value="添加" class="btn btn-primary" onclick="addProduct()">
+                    <button type="button" id="add" name="add" value="添加" class="btn btn-primary" onclick="addProduct()" style="margin-right: 10px;">
                         &#28155;&#21152;</button>
+                    <button type="button" id="export" name="export" value="导出Excel" class="btn btn-primary" onclick="exportExcel()">
+                        导出Excel</button>
         </form>
     </div>
 		<table class="table">
@@ -81,16 +88,16 @@
                     <table class="table" >
                         <thead>
                             <tr style="text-align:center;">
-                                <td style="font-size:14px;">序号</td>
-                                <td style="font-size:14px;">商品编号</td>
-                                <td style="font-size:14px;">二级分类</td>
-                                <td style="font-size:14px;">商品图片</td>
-                                <td style="font-size:14px;">商品名称</td>
-                                <td style="font-size:14px;">商品价格</td>
-                                <td style="font-size:14px;">库存量</td>
-                                <td style="font-size:14px;">是否热门</td>
-                                <td style="font-size:14px;">编辑</td>
-                                <td style="font-size:14px;">删除</td>
+                                <td style="font-size:14px;font-weight: bold;">序号</td>
+                                <td style="font-size:14px;font-weight: bold;">商品编号</td>
+                                <td style="font-size:14px;font-weight: bold;">二级分类</td>
+                                <td style="font-size:14px;font-weight: bold;">商品图片</td>
+                                <td style="font-size:14px;font-weight: bold;">商品名称</td>
+                                <td style="font-size:14px;font-weight: bold;">商品价格</td>
+                                <td style="font-size:14px;font-weight: bold;">库存量</td>
+                                <td style="font-size:14px;font-weight: bold;">是否热门</td>
+                                <td style="font-size:14px;font-weight: bold;">编辑</td>
+                                <td style="font-size:14px;font-weight: bold;">删除</td>
                             </tr>
                         </thead>
                         <tbody>

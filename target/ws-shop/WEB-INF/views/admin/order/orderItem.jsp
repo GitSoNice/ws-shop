@@ -6,7 +6,7 @@
 		<tbody>
 		<tr>
 			<c:forEach items="${orderItems}" var="i">
-			<tr bgcolor="#778899">
+			<tr bgcolor="#d3d3d3">
 				<td>
 					商品编号
 				</td>

@@ -4,8 +4,11 @@ import com.ws.shop.bean.PageInfo;
 import com.ws.shop.entity.AdminEntity;
 import com.ws.shop.entity.UserEntity;
 import com.ws.shop.service.AdminEntityService;
+import com.ws.shop.service.OrderEntityService;
+import com.ws.shop.service.ProductsEntityService;
 import com.ws.shop.service.UserEntityService;
 import com.ws.shop.utils.ActionResult;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +18,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.InputStream;
 import java.util.Map;
 
 /**
@@ -34,6 +40,12 @@ public class AdminController {
 
     @Autowired
     UserEntityService userEntityService;
+
+    @Autowired
+    ProductsEntityService productsEntityService;
+
+    @Autowired
+    OrderEntityService orderEntityService;
 
     /**
      * 管理员登陆界面
@@ -161,5 +173,47 @@ public class AdminController {
         logger.info("根据uid查找到的用户{}",user);
         map.put("user", user);
         return "admin/user/edit";
+    }
+
+    /**
+     * 管理员导出用户信息
+     * @param response
+     * @throws Exception
+     */
+    @RequestMapping("/exportUser")
+    public void exportUser(HttpServletResponse response) throws Exception{
+        InputStream is=userEntityService.getInputStream();
+        response.setContentType("application/vnd.ms-excel");
+        response.setHeader("contentDisposition", "attachment;filename=Users.xls");
+        ServletOutputStream output = response.getOutputStream();
+        IOUtils.copy(is,output);
+    }
+
+    /**
+     * 管理员导出商品信息
+     * @param response
+     * @throws Exception
+     */
+    @RequestMapping("/exportProducts")
+    public void exportProducts(HttpServletResponse response) throws Exception{
+        InputStream is=productsEntityService.getInputStream();
+        response.setContentType("application/vnd.ms-excel");
+        response.setHeader("contentDisposition", "attachment;filename=Products.xls");
+        ServletOutputStream output = response.getOutputStream();
+        IOUtils.copy(is,output);
+    }
+
+    /**
+     * 管理员导出商品信息
+     * @param response
+     * @throws Exception
+     */
+    @RequestMapping("/exportOrders")
+    public void exportOrders(HttpServletResponse response) throws Exception{
+        InputStream is=orderEntityService.getInputStream();
+        response.setContentType("application/vnd.ms-excel");
+        response.setHeader("contentDisposition", "attachment;filename=Orders.xls");
+        ServletOutputStream output = response.getOutputStream();
+        IOUtils.copy(is,output);
     }
 }

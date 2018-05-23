@@ -73,12 +73,12 @@
 					<table class="table">
 						<thead>
 							<tr style="text-align:center;">
-								<td style="font-size:14px;">序号</td>
-								<td style="font-size:14px;">二级分类id</td>
-								<td style="font-size:14px;">所属一级分类名称</td>
-								<td style="font-size:14px;">二级分类名称</td>
-								<td style="font-size:14px;">编辑</td>
-								<td style="font-size:14px;">删除</td>
+								<td style="font-size:14px;font-weight: bold;">序号</td>
+								<td style="font-size:14px;font-weight: bold;">二级分类id</td>
+								<td style="font-size:14px;font-weight: bold;">所属一级分类名称</td>
+								<td style="font-size:14px;font-weight: bold;">二级分类名称</td>
+								<td style="font-size:14px;font-weight: bold;">编辑</td>
+								<td style="font-size:14px;font-weight: bold;">删除</td>
 							</tr>
 						</thead>
 						<tbody>
