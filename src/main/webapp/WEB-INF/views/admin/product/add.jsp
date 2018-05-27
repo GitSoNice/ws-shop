@@ -29,7 +29,7 @@
 			</thead>
 			<tbody>
 				<tr style="text-align:center;">
-					<td style="font-size:20px;">商品名称：<input type="text" name="pname" value="" id="product_name"/>
+					<td>商品名称：<input type="text" name="pname" value="" id="product_name"/>
 					</td>
 				</tr>
 				<tr style="text-align:center;">

@@ -72,7 +72,7 @@
                     商品名称<input type="text" id="pname" name="pname" placeholder="商品名" class="inputText" style="margin-right: 20px;"/>
                     二级分类名称<input type="text" id="csname" name="csname" placeholder="二级分类名" class="inputText" style="margin-right: 20px;"/>
                     <input type="submit" value="查询" class="btn btn-primary" style="margin-right: 10px;" />
-                    <button type="button" id="add" name="add" value="添加" class="btn btn-primary" onclick="addProduct()">
+                    <button type="button" id="add" name="add" value="添加" class="btn btn-primary" onclick="addProduct()" style="margin-right: 10px;">
                         &#28155;&#21152;</button>
                     <button type="button" id="export" name="export" value="导出Excel" class="btn btn-primary" onclick="exportExcel()">
                         导出Excel</button>

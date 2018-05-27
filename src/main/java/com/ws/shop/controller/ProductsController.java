@@ -1,12 +1,10 @@
 package com.ws.shop.controller;
 
 import com.ws.shop.bean.PageInfo;
-import com.ws.shop.entity.CategoryEntity;
-import com.ws.shop.entity.CategorySecondEntity;
-import com.ws.shop.entity.ProductsEntity;
-import com.ws.shop.entity.UserEntity;
+import com.ws.shop.entity.*;
 import com.ws.shop.service.AdminEntityService;
 import com.ws.shop.service.CategorySecondEntityService;
+import com.ws.shop.service.OrderItemEntityService;
 import com.ws.shop.service.ProductsEntityService;
 import com.ws.shop.utils.ActionResult;
 import org.apache.commons.io.FileUtils;
@@ -47,6 +45,9 @@ public class ProductsController {
 
     @Autowired
     AdminEntityService adminEntityService;
+
+    @Autowired
+    OrderItemEntityService  orderItemEntityService;
 
     @Autowired
     CategorySecondEntityService categorySecondEntityService;
@@ -160,7 +161,13 @@ public class ProductsController {
             ModelAndView modelAndView = new ModelAndView("redirect:/adminlogin.html");
             return modelAndView;
         }
-
+        List<OrderItemEntity> orderItemEntityList = orderItemEntityService.orderItemList(product.getPid());
+        if(orderItemEntityList.size()!=0 && orderItemEntityList != null){
+            for(OrderItemEntity orderItemEntity : orderItemEntityList){
+                ActionResult res =orderItemEntityService.deleteOrderItem(orderItemEntity);
+                logger.info("结果状态{}",res.getCode());
+            }
+        }
         productsEntityService.deleteProduct(product,1);
         ModelAndView modelAndView = new ModelAndView("redirect:/listProduct?propage=0");
         return modelAndView;
