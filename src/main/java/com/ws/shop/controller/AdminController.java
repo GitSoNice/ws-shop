@@ -204,7 +204,7 @@ public class AdminController {
     }
 
     /**
-     * 管理员导出商品信息
+     * 管理员导出订单信息
      * @param response
      * @throws Exception
      */

@@ -32,6 +32,28 @@
                 $("#username").val("");
             });
         });
+
+        function checkForm() {
+            var username = $("#username").val();
+            if (username == null || username == '') {
+                alert("用户名不能为空!");
+                return false;
+            }
+            if ((username.charAt(0).charCodeAt(0) < 65) || (username.charAt(0).charCodeAt(0) > 90)) {
+                alert("输入的用户名首字符必须是大写字母");
+                return false;
+            }
+            var password = $("#password").val();
+            if (password == null || password == '') {
+                alert("密码不能为空!");
+                return false;
+            }
+            var captcha = $("#captcha").val();
+            if (captcha == null || captcha == '') {
+                alert("验证码不能为空!");
+                return false;
+            }
+        }
     </script>
 </head>
 
@@ -73,7 +95,7 @@
 
                 <form:form id="loginForm" modelAttribute="user"
                            action="${ pageContext.request.contextPath }/login"
-                           method="post">
+                           method="post" onsubmit="return checkForm()">
                     <table>
                         <tbody>
                         <tr>

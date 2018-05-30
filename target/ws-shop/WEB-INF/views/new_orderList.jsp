@@ -46,7 +46,9 @@
                     <tr>
                         <th colspan="5">订单编号:<c:out value="${order.oid}"/>&nbsp;&nbsp;&nbsp;&nbsp;
                             订单金额:<font color="red"><c:out value="${order.total }"/></font>
-                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;收货人:<c:out value="${order.name }"/>
+                            &nbsp;&nbsp;&nbsp;&nbsp;收货地址:<c:out value="${order.addr }"/>
+                            &nbsp;&nbsp;&nbsp;&nbsp;电话:<c:out value="${order.phone }"/>
                             <c:if test="${order.state == 1}">
                                 <a
                                         href="${ pageContext.request.contextPath }/findByOid/<c:out value="${order.oid}" />">

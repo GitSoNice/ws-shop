@@ -220,9 +220,6 @@ public class OrderController {
         Float money = wallet.getMoney();
         Float fee = Float.parseFloat(total);
 
-        pageInfo.setPage(0);
-        Page<OrdersEntity> ordersEntity = orderEntityService.findByUid(user.getUid(),pageInfo);
-        map.put("page", ordersEntity);
         //如果钱包余额大于消费金额，更新商品库存
         if (money >= fee) {
 
@@ -243,8 +240,14 @@ public class OrderController {
             afterOrder.setState(2);
             orderEntityService.saveOrders(afterOrder);
             map.put("paymentSuccess", "success");
+            pageInfo.setPage(0);
+            Page<OrdersEntity> ordersEntity = orderEntityService.findByUid(user.getUid(),pageInfo);
+            map.put("page", ordersEntity);
             return "new_orderList";
         }
+        pageInfo.setPage(0);
+        Page<OrdersEntity> ordersEntity = orderEntityService.findByUid(user.getUid(),pageInfo);
+        map.put("page", ordersEntity);
         map.put("paymentFalse", "false");
         return "new_orderList";
     }

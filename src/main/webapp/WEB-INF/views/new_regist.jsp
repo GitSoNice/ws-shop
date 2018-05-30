@@ -67,6 +67,11 @@
                 alert("年龄不能为空!");
                 return false;
             }
+            var checkcode = $("#checkcode").val();
+            if (checkcode == null || checkcode == '') {
+                alert("验证码不能为空!");
+                return false;
+            }
         }
 
         function checkUsername() {
