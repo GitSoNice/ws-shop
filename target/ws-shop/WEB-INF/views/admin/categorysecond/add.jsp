@@ -15,19 +15,28 @@
 		<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 	</HEAD>
+	<script>
+        function checkForm() {
+            var csname = $("#csname").val();
+            if (csname == null || csname == '') {
+                alert("二级分类名称不能为空!");
+                return false;
+            }
+        }
+	</script>
 	<body>
-		<form id="userAction_save_do" name="Form1" action="${pageContext.request.contextPath}/addCategorySecond" method="post">
+		<form id="Form1" name="Form1" action="${pageContext.request.contextPath}/addCategorySecond" method="post" onsubmit="return checkForm();">
 			&nbsp;
 			<table class="table">
 				<thead>
 				<tr style="text-align:center;font-size:20px;font-weight: bold;">
-					<td style="font-size:16px;">添加二级分类</td>
+					<td style="font-size:22px;">添加二级分类</td>
 				</tr>
 				</thead>
 				<tbody>
 				<tr style="text-align:center;">
 					<td style="font-size:20px;">
-						二级分类名称：<input type="text" name="csname" value="" id="userAction_save_do_logonName"/>
+						二级分类名称：<input type="text" name="csname" value="" id="csname"/>
 					</td>
 				</tr>
 				<tr style="text-align:center;">

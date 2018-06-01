@@ -15,22 +15,31 @@
 		<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 	</HEAD>
-	
+	<script>
+
+        function checkForm() {
+            var csname = $("#csname").val();
+            if (csname == null || csname == '') {
+                alert("二级分类名称不能为空!");
+                return false;
+            }
+        }
+	</script>
 	<body>
-		<form id="userAction_save_do" name="Form1" action="${pageContext.request.contextPath}/updateCategorySecond" method="post">
+		<form id="Form1" name="Form1" action="${pageContext.request.contextPath}/updateCategorySecond" method="post" onsubmit="return checkForm();">
 			<input type="hidden" name="csid" value="${categorySecond.csid }"/>
 			&nbsp;
 			<table class="table">
 				<tr style="text-align:center;font-size:20px;font-weight: bold;">
-					<td style="font-size:16px;">编辑二级分类</td>
+					<td style="font-size:22px;">编辑二级分类</td>
 				</tr>
 				<tbody>
 				<tr style="text-align:center;">
-					<td>二级分类名称：<input type="text" name="csname" value="<c:out value="${categorySecond.csname }"/>" id="userAction_save_do_logonName"/>
+					<td style="font-size:20px;">二级分类名称：<input type="text" name="csname" value="<c:out value="${categorySecond.csname }"/>" id="csname"/>
 					</td>
 				</tr>
 				<tr style="text-align:center;">
-					<td>
+					<td style="font-size:20px;">
 						所属的一级分类：
 						<select name="cid">
 						<c:forEach items="${categorys}" var="c">

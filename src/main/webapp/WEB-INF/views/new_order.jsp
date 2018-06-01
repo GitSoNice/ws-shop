@@ -22,6 +22,34 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 
 </head>
+<script>
+
+    function checkForm() {
+        var name = $("#name").val();
+        if (name == null || name == '') {
+            alert("姓名不能为空!");
+            return false;
+        }
+
+        var phone = $("#phone").val();
+        if (phone == null || phone == '') {
+            alert("电话不能为空!");
+            return false;
+        }
+
+        var addr = $("#addr").val();
+        if (addr == null || addr == '') {
+            alert("地址不能为空!");
+            return false;
+        }
+
+        var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
+        if (!myreg.test(phone)) {
+            alert("电话输入不正确!");
+            return false;
+        }
+    }
+</script>
 <body>
 
 <%@ include file="new_menu.jsp" %>
@@ -67,19 +95,17 @@
                 value="${order.total}"/>元
         </strong>
         </div>
-        <form id="orderForm"
-              action="${ pageContext.request.contextPath }/payOrder"
-              method="post">
+        <form id="orderForm" action="${ pageContext.request.contextPath }/payOrder" method="post">
             <input type="hidden" name="oid"
                    value="<c:out value="${order.oid}"/>"/>
             <div class="span24">
                 <p>
-                    收货地址：<input name="addr" type="text" class="inputText" value="<c:out value="${sessionScope.user.addr}"/>"
+                    收货地址：<input name="addr" id="addr" type="text" class="inputText" value="<c:out value="${sessionScope.user.addr}"/>"
                                 style="width: 350px"/> <br/>
-                    收货人&nbsp;&nbsp;&nbsp;：<input name="name" type="text" class="inputText"
+                    收货人&nbsp;&nbsp;&nbsp;：<input name="name" id="name" type="text" class="inputText"
                                                  value="<c:out value="${sessionScope.user.name}"/>"
                                                  style="width: 150px"/> <br/>
-                    联系方式：<input name="phone" type="text" class="inputText" value="<c:out value="${sessionScope.user.phone}"/>"
+                    联系方式：<input name="phone" id="phone" type="text" class="inputText" value="<c:out value="${sessionScope.user.phone}"/>"
                                 style="width: 150px"/>
 
                     <%-- 隐藏域，订单总金额 --%>
@@ -89,7 +115,7 @@
 
                 <hr/>
                 <p style="text-align: right">
-                    <a href="javascript:document.getElementById('orderForm').submit();">
+                    <a href="javascript:document.getElementById('orderForm').submit();" onclick="return checkForm();">
                         <img src="${pageContext.request.contextPath}/images/finalbutton.gif" width="204" height="51" border="0"/>
                     </a>
                 </p>

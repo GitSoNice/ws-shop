@@ -14,13 +14,43 @@
 	<script type="text/javascript"
 			src="${pageContext.request.contextPath}/js/jquery.js"></script>
 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/Calendar.js"></script>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 </HEAD>
+<script>
+	function Calendar(){
+        $('#privilegeTime').showCalendar();
+	}
+
+    function checkForm() {
+        var category_name = $("#category_name").val();
+        if (category_name == null || category_name == '') {
+            alert("一级分类名称不能为空!");
+            return false;
+        }
+        var discount = $("#discount").val();
+        if (discount == null || discount == '') {
+            alert("折扣不能为空!");
+            return false;
+        }
+        var privilegeTime = $("#privilegeTime").val();
+        if (privilegeTime == null || privilegeTime == '') {
+            alert("优惠时间不能为空!");
+            return false;
+        }
+
+        var pattern = /(0\.\d{1,2})$/;
+        if(!pattern.test(discount)) {
+            alert("折扣必须是小于一的一位小数，如0.1！");
+            return false;
+        }
+    }
+</script>
 <body>
 <!--  -->
 <form id="userAction_save_do" name="Form1"
 	  action="${pageContext.request.contextPath}/addCategory" method="post"
-	  enctype="multipart/form-data">
+	  enctype="multipart/form-data" onsubmit="return checkForm();">
 	&nbsp;
 	<table class="table">
 		<thead>
@@ -31,17 +61,17 @@
 		<tbody>
 			<tr style="text-align:center;">
 				<td style="font-size:20px;">
-					一级分类名称：<input type="text" name="cname" value="" id="category_name"/>
+					一级分类名称：<input type="text" name="cname" value="" id="category_name" placeholder="请输入一级分类名字"/>
+				</td>
+			</tr>
+			<tr style="text-align:center;">
+				<td style="font-size:22px;">
+					折扣：<input type="text" name="discount" value="" id="discount" placeholder="不能超过1"/>
 				</td>
 			</tr>
 			<tr style="text-align:center;">
 				<td style="font-size:20px;">
-					折扣：<input type="text" name="discount" value="" id="discount"/>
-				</td>
-			</tr>
-			<tr style="text-align:center;">
-				<td style="font-size:20px;">
-					优惠时间：<input type="text" name="privilegeTime" value="" id="privilegeTime"/>
+					优惠时间：<input type="text" name="privilegeTime" value="" id="privilegeTime" onclick="Calendar();" placeholder="yyyy-mm-dd日期格式"/>
 			</tr>
 			<tr>
 				<td width="100%" style="text-align:center;">

@@ -8,6 +8,7 @@ import com.ws.shop.service.OrderEntityService;
 import com.ws.shop.service.ProductsEntityService;
 import com.ws.shop.service.UserEntityService;
 import com.ws.shop.utils.ActionResult;
+import com.ws.shop.utils.MD5;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -150,6 +151,8 @@ public class AdminController {
     @RequestMapping(value = "/updateUser")
     public ModelAndView updateUser(@ModelAttribute("user") UserEntity user) {
         logger.info("尝试更新用户{}",user);
+        String md5 = MD5.md5(user.getPassword());
+        user.setPassword(md5);
         ActionResult res = adminEntityService.updateUser(user);
         if(res.getCode() != 200){
             logger.info("更新用户失败");

@@ -92,7 +92,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div id="div2" class="col-md-12">
-                            <form id= "form1" class="form-horizontal" action="${pageContext.request.contextPath}/updateUserInfo" method="post" >
+                            <form id= "form1" class="form-horizontal" action="${pageContext.request.contextPath}/updateUserInfo" method="post" onsubmit="return checkForm();" >
                                 <input type="hidden" name="uid" value="<c:out value='${userinfo.uid }'/>"/>
                                 <input type="hidden" name="username" value="<c:out value='${userinfo.username }'/>"/>
                                 <input type="hidden" name="password" value="<c:out value='${userinfo.password }'/>"/>
@@ -192,6 +192,44 @@
     function changStatus(){
         $("#div1").hide();
         $("#div2").show();
+    }
+
+    function checkForm() {
+        var addr = $("#addr").val();
+        if (addr == null || addr == '') {
+            alert("地址不能为空!");
+            return false;
+        }
+
+        var name = $("#name").val();
+        if (name == null || name == '') {
+            alert("姓名不能为空!");
+            return false;
+        }
+
+        var email = $("#email").val();
+        if (email == null || email == '') {
+            alert("邮箱不能为空!");
+            return false;
+        }
+        var reg =/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+        if(!reg.test(email)){
+            alert("邮箱格式不正确!");
+            return false;
+        }
+
+        var phone =$("#phone").val();
+        var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
+        if (!myreg.test(phone)) {
+            alert("电话输入不正确!");
+            return false;
+        }
+
+        var age = $("#age").val();
+        if (age == null || age == '') {
+            alert("年龄不能为空!");
+            return false;
+        }
     }
 
     function change(){

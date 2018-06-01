@@ -17,46 +17,102 @@
 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 </HEAD>
+<script>
 
+    function checkForm() {
+        var username = $("#username").val();
+        if (username == null || username == '') {
+            alert("用户名不能为空!");
+            return false;
+        }
+
+        if ((username.charAt(0).charCodeAt(0) < 65) || (username.charAt(0).charCodeAt(0) > 90)) {
+            alert("输入的用户名首字符必须是大写字母");
+            return false;
+        }
+
+        var password = $("#password").val();
+        if (password == null || password == '') {
+            alert("密码不能为空!");
+            return false;
+        }
+
+        var name = $("#name").val();
+        if (name == null || name == '') {
+            alert("姓名不能为空!");
+            return false;
+        }
+
+        var email = $("#email").val();
+        if (email == null || email == '') {
+            alert("邮件不能为空!");
+            return false;
+        }
+
+        var phone = $("#phone").val();
+        if (phone == null || phone == '') {
+            alert("电话不能为空!");
+            return false;
+        }
+
+        var addr = $("#addr").val();
+        if (addr == null || addr == '') {
+            alert("地址不能为空!");
+            return false;
+        }
+
+        var reg =/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+        if(!reg.test(email)){
+            alert("邮箱格式不正确!");
+            return false;
+		}
+
+        var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
+        if (!myreg.test(phone)) {
+            alert("电话输入不正确!");
+            return false;
+        }
+        }
+</script>
 <body>
-	<form:form id="userAction_save_do" name="Form1"
+	<form:form id="Form1" name="Form1"
 		action="${pageContext.request.contextPath}/updateUser" method="post"
-		modelAttribute="user">
+		modelAttribute="user" onsubmit="return checkForm();">
 		<table class="table">
 			<tr style="text-align:center;font-size:20px;font-weight: bold;">
-				<td style="font-size:16px;">编辑用户</td>
+				<td style="font-size:22px;">编辑用户</td>
 			</tr>
 			<form:hidden path="state"/>
 			<form:hidden path="uid"/>
 			<form:hidden path="code"/>
 			<tbody>
 				<tr style="text-align:center;">
-					<td>用户名称：
+					<td style="font-size:16px;">用户名称：
 						<form:input type="text" path="username" id="username" />
 					</td>
 				</tr>
 				<tr style="text-align:center;">
-					<td>密码：
+					<td style="font-size:16px;">密码：
 						<form:input type="password" path="password" id="password"/>
 					</td>
 				</tr>
 				<tr style="text-align:center;">
-					<td>真实姓名：
+					<td style="font-size:16px;">真实姓名：
 						<form:input type="text" path="name" id="name" />
 					</td>
 				</tr>
 				<tr style="text-align:center;">
-					<td>邮箱：
+					<td style="font-size:16px;">邮箱：
 						<form:input type="text" path="email" id="email" />
 					</td>
 				</tr>
 				<tr style="text-align:center;">
-					<td>电话：
+					<td style="font-size:16px;">电话：
 						<form:input type="text" path="phone" id="phone" />
 					</td>
 				</tr>
 				<tr style="text-align:center;">
-					<td>地址：
+					<td style="font-size:16px;">地址：
 						<form:input type="text" path="addr" id="addr" />
 					</td>
 				</tr>

@@ -15,25 +15,76 @@
 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 </HEAD>
+<script>
+
+    function checkForm() {
+        var pname = $("#pname").val();
+        if (pname == null || pname == '') {
+            alert("商品名称不能为空!");
+            return false;
+        }
+        var marke_price = $("#marke_price").val();
+        if (marke_price == null || marke_price == '') {
+            alert("市场价不能为空!");
+            return false;
+        }
+
+        var shop_price = $("#shop_price").val();
+        if (shop_price == null || shop_price == '') {
+            alert("商城价不能为空!");
+            return false;
+        }
+
+        var inventory = $("#inventory").val();
+        if (inventory == null || inventory == '') {
+            alert("库存不能为空!");
+            return false;
+        }
+
+        var upload = $("#upload").val();
+        if (upload == null || upload == '') {
+            alert("图片不能为空!");
+            return false;
+        }
+
+        var pdesc = $("#pdesc").val();
+        if (pdesc == null || pdesc == '') {
+            alert("描述不能为空!");
+            return false;
+        }
+
+        var pattern = /^[0-9]+(.[0-9]{1,2})?$/;
+        if(!pattern.test(marke_price)){
+            alert("输入市场价格金额不正确！！");
+            return false;
+		}
+
+        var reg =  /^[0-9]+(.[0-9]{1,2})?$/;
+        if(!reg.test(shop_price)){
+            alert("输入商城价格金额不正确！！");
+            return false;
+        }
+    }
+</script>
 <body>
 	<!--  -->
-	<form id="userAction_save_do" name="Form1"
+	<form id="Form1" name="Form1"
 		action="${pageContext.request.contextPath}/addProduct" method="post"
-		enctype="multipart/form-data">
+		enctype="multipart/form-data"  onsubmit="return checkForm();">
 		&nbsp;
 		<table class="table">
 			<thead>
 			    <tr style="text-align:center;font-size:20px;font-weight: bold;">
-					<td style="font-size:16px;">添加商品</td>
+					<td style="font-size:22px;">添加商品</td>
 				</tr>
 			</thead>
 			<tbody>
 				<tr style="text-align:center;">
-					<td>商品名称：<input type="text" name="pname" value="" id="product_name"/>
+					<td style="font-size:16px;">商品名称：<input type="text" name="pname" value="" id="pname"/>
 					</td>
 				</tr>
 				<tr style="text-align:center;">
-					<td style="padding-right:120px;">是否热门：
+					<td style="padding-right:120px;font-size:16px;">是否热门：
 						<select name="is_hot">
 							<option value="1">是</option>
 							<option value="0">否</option>
@@ -41,27 +92,27 @@
 					</td>
 				</tr>
 				<tr style="text-align:center;">
-					<td>市场价格：
+					<td style="font-size:16px;">市场价格：
 						<input type="text" name="market_price" value="" id="marke_price" />
 					</td>
 				</tr>
 				<tr style="text-align:center;">
-					<td>商城价格：
+					<td style="font-size:16px;">商城价格：
 						<input type="text" name="shop_price" value="" id="shop_price" />
 					</td>
 				</tr>
 				<tr style="text-align:center;">
-					<td>库存：
+					<td style="font-size:16px;">库存：
 						<input type="text" name="inventory" value="" id="inventory" />
 					</td>
 				</tr>
 				<tr style="text-align: center;">
-					<td style="padding-right:150px;">商品图片：
-						<input type="file" name="upload" style="padding-left:550px;"/>
+					<td style="padding-right:150px;font-size:16px;">商品图片：
+						<input type="file" name="upload" id="upload" style="padding-left:550px;"/>
 					</td>
 				</tr>
 				<tr style="text-align:center;">
-					<td style="padding-right:20px;">
+					<td style="padding-right:20px;font-size:16px;">
 						所属的二级分类：
 						<select name="csid">
 							<c:forEach var="cs" items="${categorySeconds }">
@@ -72,8 +123,8 @@
 					</td>
 				</tr>
 				<tr style="text-align:center;">
-					<td>商品描述：
-						<textarea name="pdesc" rows="5" cols="30"></textarea>
+					<td style="font-size:16px;">商品描述：
+						<textarea name="pdesc" rows="5" cols="30" id="pdesc"></textarea>
 					</td>
 				</tr>
 				<tr>

@@ -15,31 +15,61 @@
     <script type="text/javascript"
             src="${pageContext.request.contextPath}/js/jquery.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/Calendar.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 </HEAD>
+<script>
+    function Calendar(){
+        $('#privilegeTime').showCalendar();
+    }
+
+    function checkForm() {
+        var cname = $("#cname").val();
+        if (cname == null || cname == '') {
+            alert("一级分类名称不能为空!");
+            return false;
+        }
+        var discount = $("#discount").val();
+        if (discount == null || discount == '') {
+            alert("折扣不能为空!");
+            return false;
+        }
+        var privilegeTime = $("#privilegeTime").val();
+        if (privilegeTime == null || privilegeTime == '') {
+            alert("优惠时间不能为空!");
+            return false;
+        }
+
+        var pattern = /(0\.\d{1,2})$/;
+        if(!pattern.test(discount)) {
+            alert("折扣必须是小于一的一位小数，如0.1！");
+            return false;
+        }
+    }
+</script>
 <body>
-<form:form id="userAction_save_do" name="Form1"
+<form:form id="Form1" name="Form1"
            action="${pageContext.request.contextPath}/updateCategory" method="post"
-           modelAttribute="category" enctype="multipart/form-data">
+           modelAttribute="category" enctype="multipart/form-data" onsubmit="return checkForm();">
     <table class="table">
         <tr style="text-align:center;font-size:20px;font-weight: bold;">
-            <td style="font-size:16px;">编辑一级分类</td>
+            <td style="font-size:22px;">编辑一级分类</td>
         </tr>
         <form:hidden path="cid"/>
         <tbody>
             <tr style="text-align:center;">
-                <td>
-                    一级分类名称：<form:input type="text" path="cname" id="category_name"/>
+                <td style="font-size:20px;">
+                    一级分类名称：<form:input type="text" path="cname" id="cname"/>
                 </td>
             </tr>
             <tr style="text-align:center;">
-                <td>
+                <td style="font-size:20px;">
                     折扣：<form:input type="text" path="discount" id="discount"/>
                 </td>
              </tr>
             <tr style="text-align:center;">
-                <td>
-                     优惠时间：<form:input type="text" path="privilegeTime" id="privilegeTime"/>
+                <td style="font-size:20px;">
+                     优惠时间：<form:input type="text" path="privilegeTime" id="privilegeTime" onclick="Calendar();"/>
                 </td>
             </tr>
             <tr>
